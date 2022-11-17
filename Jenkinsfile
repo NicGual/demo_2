@@ -5,8 +5,7 @@ pipeline {
             steps {
                 echo "cloning..." 
                 sh 'pwd'
-                sh 'cd projects'
-                sh 'git clone https://github.com/NicGual/demo_2'
+                
             }
         }
         
