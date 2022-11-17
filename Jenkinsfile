@@ -7,7 +7,9 @@ pipeline {
                 sh 'pwd'
                 dir('infrastructure') {
                     sh 'pwd'
-                    sh 'ls -la'
+                    sh 'terraform init'
+                    sh 'terraform plan'
+                    sh 'terraform apply -auto-approve'
                 }
                 sh 'pwd'
             }
