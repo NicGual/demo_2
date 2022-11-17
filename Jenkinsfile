@@ -5,8 +5,9 @@ pipeline {
             steps {
                 echo "cloning..." 
                 sh 'pwd'
-                dir('your-sub-directory') {
+                dir('infrastructure') {
                     sh 'pwd'
+                    sh 'ls -la'
                 }
                 sh 'pwd'
             }
