@@ -3,7 +3,10 @@ pipeline {
     stages {
         stage("cloning repo") {
             steps {
-                echo "cloning..."               
+                echo "cloning..." 
+                sh 'pwd'
+                sh 'cd projects'
+                sh 'git clone https://github.com/NicGual/demo_2'
             }
         }
         
