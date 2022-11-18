@@ -5,12 +5,12 @@ pipeline {
             steps {
                 echo "cloning..." 
                 sh 'pwd'
-                dir('infrastructure') {
-                    sh 'pwd'
-                    sh 'terraform init'
-                    sh 'terraform plan'
-                    sh 'terraform apply -auto-approve'
-                }
+                // dir('infrastructure') {
+                //     sh 'pwd'
+                //     sh 'terraform init'
+                //     sh 'terraform plan'
+                //     sh 'terraform apply -auto-approve'
+                // }
                 sh 'pwd'
             }
         }
