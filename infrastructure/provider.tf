@@ -1,5 +1,5 @@
 provider "aws" {
   region = var.AWS_REGION
-  profile = var.AWS_PROFILE
+  shared_credentials_files = ["~/.aws/credentials"]
 }
 
