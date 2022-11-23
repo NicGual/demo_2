@@ -22,12 +22,12 @@ resource "aws_instance" "machine-1" {
 #       "sudo /tmp/script.sh",
 #     ]
 #   }
-  connection {
-    host        = coalesce(self.public_ip, self.private_ip)
-    type        = "ssh"
-    user        = var.INSTANCE_USERNAME_1
-    private_key = file(var.PATH_TO_PRIVATE_KEY_1)
-  }
+  # connection {
+  #   host        = coalesce(self.public_ip, self.private_ip)
+  #   type        = "ssh"
+  #   user        = var.INSTANCE_USERNAME_1
+  #   private_key = file(var.PATH_TO_PRIVATE_KEY_1)
+  # }
 }
 
 resource "aws_instance" "machine-2" {
@@ -54,10 +54,10 @@ resource "aws_instance" "machine-2" {
 #       "sudo /tmp/script.sh",
 #     ]
 #   }
-  connection {
-    host        = coalesce(self.public_ip, self.private_ip)
-    type        = "ssh"
-    user        = var.INSTANCE_USERNAME_2
-    private_key = file(var.PATH_TO_PRIVATE_KEY_2)
-  }
+  # connection {
+  #   host        = coalesce(self.public_ip, self.private_ip)
+  #   type        = "ssh"
+  #   user        = var.INSTANCE_USERNAME_2
+  #   private_key = file(var.PATH_TO_PRIVATE_KEY_2)
+  # }
 }
