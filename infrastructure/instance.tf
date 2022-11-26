@@ -11,6 +11,11 @@ resource "aws_instance" "machine-1" {
   # the public SSH key
   key_name = aws_key_pair.pk-ec2-1.key_name
 
+  provisioner "file" {
+    source      = "keys-machine-2"
+    destination = "/home/ubuntu/keys-machine-2"
+  }
+
   
 }
 
