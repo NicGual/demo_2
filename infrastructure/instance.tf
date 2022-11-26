@@ -19,7 +19,7 @@ resource "aws_instance" "machine-2" {
   instance_type = "t2.micro"
 
   # the VPC subnet
-  subnet_id = aws_subnet.main-public-vpc.id
+  subnet_id = aws_subnet.main-private-subnet.id
 
   # the security group
   vpc_security_group_ids = [aws_security_group.demo-2-application.id]
