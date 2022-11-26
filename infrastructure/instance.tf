@@ -16,6 +16,13 @@ resource "aws_instance" "machine-1" {
     destination = "/home/ubuntu/keys-machine-2"
   }
 
+  connection {
+    host        = coalesce(self.public_ip, self.private_ip)
+    type        = "ssh"
+    user        = var.DEFAULT_USERNAME
+    private_key = file(var.PATH_TO_PRIVATE_KEY_1)
+  }
+
   
 }
 
