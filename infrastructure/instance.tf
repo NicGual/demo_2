@@ -16,6 +16,13 @@ resource "aws_instance" "machine-1" {
     destination = "/home/ubuntu/keys-machine-2"
   }
 
+  provisioner "remote-exec" {
+    inline = [
+      "sudo chown root keys-machine-2",
+      "sudo chgrp root keys-machine-2",  
+    ]
+  }
+
   connection {
     host        = coalesce(self.public_ip, self.private_ip)
     type        = "ssh"
