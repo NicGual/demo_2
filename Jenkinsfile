@@ -8,7 +8,7 @@ pipeline {
                  dir('infrastructure') {
                 //     sh 'pwd'
                 //     sh 'terraform init'
-                     sh 'terraform plan'
+                     sh label: '' , script: 'terraform plan'
                 //     sh 'terraform apply -auto-approve'
                 }
                 dir('ansible'){
