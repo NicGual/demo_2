@@ -12,7 +12,7 @@ pipeline {
                 //     sh 'terraform apply -auto-approve'
                 // }
                 dir('ansible'){
-                    sh 'sudo ansible-playbook playbook.yml -i inventory.txt'
+                    sh 'ansible-playbook playbook.yml -i inventory.txt'
 
                 }
                 sh 'pwd'
