@@ -5,12 +5,12 @@ pipeline {
             steps {
                 echo "cloning..." 
                 sh 'pwd'
-                // dir('infrastructure') {
+                 dir('infrastructure') {
                 //     sh 'pwd'
                 //     sh 'terraform init'
-                //     sh 'terraform plan'
+                     sh 'terraform plan'
                 //     sh 'terraform apply -auto-approve'
-                // }
+                }
                 dir('ansible'){
                     sh 'ansible-playbook playbook.yml -i inventory.txt'
 
