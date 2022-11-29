@@ -16,7 +16,7 @@ pipeline {
                 //     sh 'pwd'
                 //     sh 'terraform init'
                      sh label: '' , script: 'terraform init -input=false'
-                //     sh label: '' , script: 'terraform plan'
+                     sh label: '' , script: 'terraform plan'
                 //     sh 'terraform apply -auto-approve'
                 }
                 dir('ansible'){
