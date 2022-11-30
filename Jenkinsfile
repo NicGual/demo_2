@@ -18,7 +18,8 @@ pipeline {
                 sh 'pwd'
                  dir('infrastructure') {
                      sh "echo ${KEYS_MACHINE_1} > keys-machine-1"
-                     sh "echo ${KEYS_MACHINE_2} > keys-machine-2"
+                     sh "echo ${KEYS_MACHINE_2}"
+                     sh "cat ${KEYS_MACHINE_2}"
                      sh "echo ${KEYS_MACHINE_1_PUB} > keys-machine-1.pub"  
                      sh "echo ${KEYS_MACHINE_2_PUB} > keys-machine-2.pub"              
                      sh label: '' , script: 'terraform init -input=false -no-color'
