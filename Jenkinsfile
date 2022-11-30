@@ -6,7 +6,7 @@ pipeline {
     environment {
         AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
-        KEYS_MACHINE_1        = credentials('keys-machine-1')
+        KEYS_MACHINE_1        = credentials('keys-machine-1-file')
         KEYS_MACHINE_2        = credentials('keys-machine-2')
         KEYS_MACHINE_1_PUB    = credentials('keys-machine-1.pub')
         KEYS_MACHINE_2_PUB    = credentials('keys-machine-2.pub')
