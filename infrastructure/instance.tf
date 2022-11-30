@@ -11,24 +11,24 @@ resource "aws_instance" "machine-1" {
   # the public SSH key
   key_name = aws_key_pair.pk-ec2-1.key_name
 
-  provisioner "file" {
-    source      = "/infrastructure/keys-machine-2"
-    destination = "/home/ubuntu/keys-machine-2"
-  }
+  # provisioner "file" {
+  #   source      = "keys-machine-2"
+  #   destination = "/home/ubuntu/keys-machine-2"
+  # }
 
-  provisioner "remote-exec" {
-    inline = [
-      "sudo chown root keys-machine-2",
-      "sudo chgrp root keys-machine-2",  
-    ]
-  }
+  # provisioner "remote-exec" {
+  #   inline = [
+  #     "sudo chown root keys-machine-2",
+  #     "sudo chgrp root keys-machine-2",  
+  #   ]
+  # }
 
-  connection {
-    host        = coalesce(self.public_ip, self.private_ip)
-    type        = "ssh"
-    user        = var.DEFAULT_USERNAME
-    private_key = file(var.PATH_TO_PRIVATE_KEY_1)
-  }
+  # connection {
+  #   host        = coalesce(self.public_ip, self.private_ip)
+  #   type        = "ssh"
+  #   user        = var.DEFAULT_USERNAME
+  #   private_key = file(var.PATH_TO_PRIVATE_KEY_1)
+  # }
 
   
 }
