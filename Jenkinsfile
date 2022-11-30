@@ -23,7 +23,7 @@ pipeline {
                      sh "echo ${KEYS_MACHINE_2_PUB} > keys-machine-2.pub"              
                      sh label: '' , script: 'terraform init -input=false -no-color'
                      sh label: '' , script: 'terraform plan -no-color'
-                     sh label: '' , script: 'terraform apply -no-color'
+                     sh label: '' , script: 'terraform apply -no-color -auto-approve'
                 }
                 dir('ansible'){
                     sh 'ansible-playbook playbook.yml -i inventory.txt'
