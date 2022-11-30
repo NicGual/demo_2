@@ -6,18 +6,19 @@ pipeline {
     environment {
         AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+        KEYS_MACHINE_1        = credentials('keys-machine-1')
+        KEYS_MACHINE_2        = credentials('keys-machine-2')
     }
     stages {
         stage("cloning repo") {
             steps {
-                echo "cloning..." 
+                echo "infrastructure" 
                 sh 'pwd'
                  dir('infrastructure') {
-                //     sh 'pwd'
-                //     sh 'terraform init'
-                     sh label: '' , script: 'terraform init -input=false'
-                     sh label: '' , script: 'terraform plan'
-                //     sh 'terraform apply -auto-approve'
+                     sh "echo ${KEYS_MACHINE_1} > keys-machine-1"
+                     sh "echo ${KEYS_MACHINE_1} > keys-machine-1"               
+                     sh label: '' , script: 'terraform init -input=false -no-color'
+                     sh label: '' , script: 'terraform plan -no-color'
                 }
                 dir('ansible'){
                     sh 'ansible-playbook playbook.yml -i inventory.txt'
