@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap');
+
+.LogoInstaya {
+
+/* instaYA */
+margin-left: 111px; 
+width: 169px;
+height: 53px;
+left: 111px;
+top: 52px;
+
+font-family: 'Roboto Mono';
+font-style: normal;
+font-weight: 700;
+font-size: 40px;
+line-height: 53px;
+/* identical to box height */
+
+
+color: #000000;
+
+}
+
+span { color: #FF7A00 }
+
+
+.items_menu {
+
+/* Registrarse */
+
+
+/* width: 111px;
+height: 23px;
+left: 1134px;
+top: 62px; */
+
+font-family: 'Montserrat';
+font-style: normal;
+font-weight: 700;
+font-size: 15px;
+line-height: 23px;
+/* identical to box height, or 152% */
+
+letter-spacing: 0.95px;
+
+color: #000000;
+
+}
+
+.items_menu:hover {
+    color: #FF7A00 !important; 
+}
+
+.Iniciar_sesion {
+
+/* Iniciar Sesion */
+
+
+left: 1283px;
+top: 62px;
+margin-right: 141px;
+
+font-family: 'Montserrat';
+font-style: normal;
+font-weight: 700;
+font-size: 16px;
+line-height: 24px;
+/* identical to box height, or 150% */
+
+text-align: center;
+
+color: #FF7A00;
+
+}
+
+.navbar {
+    background-color: transparent !important;
+  }
+
+
+  .btn-iniciarSesion {
+    border-color: #FF7A00;
+    background-color: transparent !important;
+}
+
+.btn-iniciarSesion:hover {
+    border-color: #FF7A00 !important;
+    background-color: #FF7A00 !important;
+    color: white;
+}

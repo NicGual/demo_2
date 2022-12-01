@@ -1,0 +1,31 @@
+.frase h2 {
+    font-family: 'Roboto Mono';
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 63px;
+
+    position: absolute;
+    width: 589px;
+    height: 120px;
+    left: 120px;
+    top: 0px;
+}
+
+.frase h2 span {
+    color: #FF7A00;
+}
+
+.delivery-foto{
+    width: 100%;
+}
+
+.crear-cuenta-frase{
+    border-bottom: 1px solid #000000;
+}
+
+.login-form {
+    background-color: #FFDE9D;
+    border-radius: 20px;
+    width: 497px;
+    height: 586px;
+}

@@ -1,0 +1,267 @@
+@import url('https://fonts.googleapis.com/css2?family=Urbanist&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+
+.rectangulo {
+
+/* Rectangle */
+
+
+position: absolute;
+width: 4px;
+height: 221px;
+left: 121px;
+top: 286px;
+
+background: #FF7A00;
+
+}
+
+.tituloHome {
+
+/* Mundo de Soluciones */
+
+position: absolute;
+width: 500px;
+height: 48px;
+left: 179.4px;
+top: 305px;
+
+font-family: 'Urbanist';
+font-style: normal;
+font-weight: 400;
+font-size: 40px;
+line-height: 48px;
+/* identical to box height, or 120% */
+
+
+color: #525252;
+
+}
+
+.slogan{
+
+/* Transporte, entrega y logística física o digital para ti o tu empresa a tiempo. */
+
+position: absolute;
+width: 427px;
+height: 62px;
+left: 179.4px;
+top: 364px;
+
+font-family: 'Urbanist';
+font-style: normal;
+font-weight: 400;
+font-size: 22px;
+line-height: 31px;
+/* or 141% */
+
+
+color: #525252;
+
+}
+
+
+.slogan2 {
+
+/* ¡Lo tenemos todo! */
+
+
+position: absolute;
+width: 300px;
+height: 31px;
+left: 179.4px;
+top: 440px;
+
+font-family: 'Urbanist';
+font-style: normal;
+font-weight: 400;
+font-size: 23px;
+line-height: 31px;
+/* identical to box height, or 135% */
+
+
+color: #525252;
+
+}
+
+.imagen {
+
+
+/* OBJECTS */
+
+height: 591.8179931640625px;
+width: 678.2384033203125px;
+left: 743.54248046875px;
+top: 235px;
+border-radius: 0px;
+
+/* background-image: url("../../assets/Envios.svg");
+background-repeat: no-repeat; */
+
+position: absolute;
+left: 48.41%;
+right: 7.44%;
+top: 23.41%;
+bottom: 17.65%;
+
+}
+
+
+.guia {
+
+/* Ingresa el # de guia */
+
+
+position: absolute;
+width: 139px;
+height: 18px;
+left: 133px;
+top: 27px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 15px;
+line-height: 18px;
+
+color: #9F9F9F;
+
+}
+
+.consultar {
+/* Consultar */
+
+
+position: absolute;
+width: 73px;
+height: 20px;
+left: 204px;
+top: 580px;
+
+font-family: 'Urbanist';
+font-style: normal;
+font-weight: 400;
+font-size: 17px;
+line-height: 20px;
+/* identical to box height, or 118% */
+
+
+color: #525252;
+
+}
+
+.numeroguia {
+
+/* Ingresa el # de guia */
+
+
+position: absolute;
+width: 139px;
+height: 18px;
+left: 133px;
+top: 27px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 15px;
+line-height: 18px;
+
+color: #9F9F9F;
+
+}
+
+.rectangulo1guia{
+
+
+/* Rectangle */
+
+
+position: absolute;
+width: 509px;
+height: 70px;
+left: 179px;
+top: 555px;
+
+background: #FFFFFF;
+box-shadow: 0px 5px 25px #FF7A00;
+border-radius: 38px;
+
+}
+
+.rectanguloguia {
+
+    /* Rectangle */
+
+
+position: absolute;
+width: 222px;
+height: 28px;
+left: 312px;
+top: 575px;
+border-color: transparent !important;
+
+border-radius: 0px;
+
+}
+
+.rectanguloguia:focus {
+    border-color: transparent;
+    box-shadow: 0 0 0 0;
+    outline: 0 none;
+}
+
+.separador {
+
+    /* Rectangle */
+    
+    
+        position: absolute;
+        width: 0cm;
+        font-size: 28px;
+        left: 291.07px;
+        top: 566px;
+    
+        color: #D2D2D2;
+
+    
+    }
+
+
+.buscar{
+
+    position: absolute;
+
+    height: 42.49355697631836px;
+    width: 43.04452896118164px;
+    left: 614px;
+    top: 568px;
+    border-radius: 50%;
+
+    background: #FF7A00;
+    border-color: transparent;
+}
+
+.buscar:hover {
+    border-color: #FFAC60 !important;
+    background-color: #FFAC60 !important;
+}
+
+.path {
+/* Path */
+
+
+position: absolute;
+left: 40.52%;
+right: 36.22%;
+top: 28.24%;
+bottom: 30.15%;
+
+}
+
+/* @media screen and (min-width: 450px) {
+    .imagen{
+        width: 50%;
+    }       
+} */

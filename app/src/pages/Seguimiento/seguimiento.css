@@ -1,0 +1,58 @@
+.sidenav {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #FFE5B1;
+    overflow-x: hidden;
+    padding-top: 20px;
+  }
+  
+  .sidenav a {
+    padding: 20px 20px 6px 16px;
+    text-decoration: none;
+    font-family: Noto Sans Tai Le;
+    font-weight: bold;
+  
+    font-size: 20px;
+    color: #383B3D ;
+    display: block;
+  }
+  
+  .sidenav a:hover {
+    color: #f1f1f1;
+  }
+  
+  .main {
+    margin-left: 260px; /* Same as the width of the sidenav */
+    margin-right:20px; 
+    font-size: 28px; /* Increased text to enable scrolling */
+    padding: 0px 10px;
+  }
+  
+  .titulo {
+    font-family:Noto Sans;
+    color:#5A5C69;
+    font-weight: bolder;
+    padding: 20px;
+    border-radius: 1rem;
+    box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.08), 0 0 0 2px white,
+      0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+  }
+  
+  .parrafo{
+    font-family: Noto Sans Tai Le;
+    color:#999DA0 ;
+    font-weight: bold;
+  
+  }
+  
+  .parrafo2{
+    font-family: Noto Sans Tai Le;
+    color:#5A5C69;
+    font-weight: bold;
+  
+  }
+  

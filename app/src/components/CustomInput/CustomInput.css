@@ -1,0 +1,18 @@
+.custom-input {
+    border-radius: 10px;
+    border: 1px solid #FFA031;
+    padding: .375rem .75rem;
+    box-sizing: border-box;
+    color: #212529;
+    font-family: 'Roboto Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.1rem;
+    line-height: 32px;
+    width: 100%;
+}
+
+.custom-input:focus {
+    border: 1px solid #FFA031;
+    outline: solid #FFA031;
+}
