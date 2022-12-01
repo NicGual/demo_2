@@ -26,7 +26,7 @@ pipeline {
             steps {
                 echo "building..." 
                 dir('ansible'){
-                    sh 'ansible-playbook playbook.yml -i inventory.txt'
+                    sh 'ansible-playbook playbook.yml -i inventory.txt -vvv'
                 }
                 sh 'pwd'
             }
