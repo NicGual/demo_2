@@ -25,4 +25,5 @@ sudo apt-get -y install docker-ce docker-ce-cli containerd.io docker-compose-plu
 echo "allow non sudo users"
 sudo groupadd docker
 sudo usermod -aG docker ubuntu
-newgrp docker
+#newgrp docker
+docker run hello-world
