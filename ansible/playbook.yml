@@ -5,10 +5,13 @@
   - name: execute script on server
     script: config-machine-1.sh
 
--name: directory copy to remote device
+-
+ name: play 2
  hosts: machine1
- copy:
-    src: /home/ubuntu/jenkins/workspace/demo pipeline/app/
-    dest: /app
-    owner: ubuntu
-    group: ubuntu
+ tasks:
+  - name: directory copy to remote device
+    copy:
+      src: /home/ubuntu/jenkins/workspace/demo pipeline/app/
+      dest: /app
+      owner: ubuntu
+      group: ubuntu
