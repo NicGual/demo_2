@@ -17,15 +17,14 @@ pipeline {
                 echo "infrastructure" 
                 sh 'pwd'
                  dir('infrastructure') {
-                     sh "echo ${KEYS_MACHINE_1} > keys-machine-1"
-                     sh "cat ${KEYS_MACHINE_1} > keys-machine-1-copy"
-                     sh "echo ${KEYS_MACHINE_2} > keys-machine-2"
-                     sh "echo ${KEYS_MACHINE_1_PUB} > keys-machine-1.pub"  
-                     sh "echo ${KEYS_MACHINE_2_PUB} > keys-machine-2.pub"              
+                    //  sh "echo ${KEYS_MACHINE_1} > keys-machine-1"
+                    //  sh "echo ${KEYS_MACHINE_2} > keys-machine-2"
+                    //  sh "echo ${KEYS_MACHINE_1_PUB} > keys-machine-1.pub"  
+                    //  sh "echo ${KEYS_MACHINE_2_PUB} > keys-machine-2.pub"              
                      sh label: '' , script: 'terraform init -input=false -no-color'
                      sh label: '' , script: 'terraform plan -no-color'
                      sh label: '' , script: 'terraform apply -no-color -auto-approve'
-                    // sh label: '' , script: 'terraform destroy -no-color -auto-approve'
+                     sh label: '' , script: 'terraform destroy -no-color -auto-approve'
                 }
                 dir('ansible'){
                     sh 'ansible-playbook playbook.yml -i inventory.txt'
