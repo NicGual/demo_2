@@ -12,6 +12,6 @@
   - name: directory copy to remote device
     copy:
       src: /home/ubuntu/jenkins/workspace/demo pipeline/app/
-      dest: /app
+      dest: /home/ubuntu
       owner: ubuntu
       group: ubuntu
