@@ -14,24 +14,25 @@ resource "aws_instance" "machine-1" {
   tags = {
     Name = "machine-1"
   }
-  # provisioner "file" {
-  #   source      = "keys-machine-2"
-  #   destination = "/home/ubuntu/keys-machine-2"
-  # }
+  provisioner "file" {
+    source      = "../config/docker-install.sh"
+    destination = "/tmp/docker-install.sh"
+  }
 
-  # provisioner "remote-exec" {
-  #   inline = [
-  #     "sudo chown root keys-machine-2",
-  #     "sudo chgrp root keys-machine-2",  
-  #   ]
-  # }
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x /tmp/docker-install.sh",
+      "sudo sed -i -e 's/\r$//' /tmp/docker-install.sh",  # Remove the spurious CR characters.
+      "sudo /tmp/docker-install.sh",
+    ]
+  }
 
-  # connection {
-  #   host        = coalesce(self.public_ip, self.private_ip)
-  #   type        = "ssh"
-  #   user        = var.DEFAULT_USERNAME
-  #   private_key = file(var.PATH_TO_PRIVATE_KEY_1)
-  # }
+  connection {
+    host        = coalesce(self.public_ip, self.private_ip)
+    type        = "ssh"
+    user        = var.DEFAULT_USERNAME
+    private_key = file(var.PATH_TO_PRIVATE_KEY_1)
+  }
 
   
 }
