@@ -14,6 +14,14 @@
 #   - name: execute script on server
 #     shell: ../ansible/config-machine-1.sh {{ image_tag|quote }} .
 
+# -
+#  name: deleting 
+#  hosts: machine1
+#  tasks:
+#   - name: execute script on server
+#     args:
+#       chdir: "/home/ubuntu/app"
+#     shell: docker build -t {{ image_tag|quote }} .
 -
  name: Pushing Image to ECR
  hosts: machine1
