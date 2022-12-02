@@ -1,5 +1,6 @@
 #!/bin/bash
 echo "hola hello"
+echo $1
 # sudo apt-get update
 # sudo apt-get -y install \
 #     ca-certificates \

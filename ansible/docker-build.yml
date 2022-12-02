@@ -1,15 +1,19 @@
--
+# hosts: machine1
+#  tasks:
+#   - name: execute script on server
+#     script: config-machine-1.sh
+# # -
  name: building image
  hosts: machine1
  vars:
    image_tag: ""
  tasks:
   - name: execute script on server
-    shell: docker build -t {{ image_tag|quote }} .
+    shell: ./config-machine-1.sh {{ image_tag|quote }} .
 
 # -
 #  name: Pushing Image to ECR
 #  hosts: machine1
 #  tasks:
 #   - name: execute script on server
-#     shell: docker build -t {{}} .
+#     shell: docker build -t {{ image_tag|quote }} .
