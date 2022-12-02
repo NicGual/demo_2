@@ -19,5 +19,4 @@
  hosts: machine1
  tasks:
   - name: execute script on server
-    chdir: /home/ubuntu/app
-    shell: docker build -t {{ image_tag|quote }} .
+    shell: chdir=/opt/tools/temp docker build -t {{ image_tag|quote }} .
