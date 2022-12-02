@@ -23,7 +23,7 @@
 #       chdir: "/home/ubuntu/app"
 #     shell: docker build -t {{ image_tag|quote }} .
 -
- name: Pushing Image to ECR
+ name: Building Image
  hosts: machine1
  tasks:
   - name: execute script on server

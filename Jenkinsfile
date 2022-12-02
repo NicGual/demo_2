@@ -1,3 +1,4 @@
+def ecr_url
 pipeline {
     agent any
     options {
@@ -17,6 +18,7 @@ pipeline {
                      sh label: '' , script: 'terraform init -input=false -no-color'
                      sh label: '' , script: 'terraform plan -no-color'
                      sh label: '' , script: 'terraform apply -no-color -auto-approve'
+                     ecr_url= sh (script: "terraform output --raw ecr_url", returnStdout: true)
                     // sh label: '' , script: 'terraform destroy -no-color -auto-approve'
                 }
                 
@@ -39,6 +41,11 @@ pipeline {
                 dir('app'){
                     sh "ansible-playbook ../ansible/docker-build.yml --extra-vars='image_tag=${GIT_HASH}' -i ../ansible/inventory.txt -vvv"
                 }
+            }
+
+            steps {
+                echo "ECR repository"
+                echo "${ecr_url}"
             }
         }
         stage("Deploying Image") {
