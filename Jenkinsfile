@@ -27,7 +27,7 @@ pipeline {
             steps {
                 echo "copying app" 
                 dir('ansible'){
-                    sh 'ansible-playbook provide.yml -i inventory.txt -vvv'
+                    sh 'ansible-playbook provide.yml -i inventory.txt '
                 }
             }
             
