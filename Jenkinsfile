@@ -36,8 +36,8 @@ pipeline {
             
             steps {
                 echo "Building app Image"
-                dir('ansible'){
-                    sh "ansible-playbook docker-build.yml --extra-vars='image_tag=${GIT_HASH}' -i inventory.txt -vvv"
+                dir('app'){
+                    sh "ansible-playbook ../ansible/docker-build.yml --extra-vars='image_tag=${GIT_HASH}' -i ../ansible/inventory.txt -vvv"
                 }
             }
         }
