@@ -5,18 +5,18 @@
 #    - name: execute script on server
 #      script: ../ansible/config-machine-1.sh
 
--
- name: building image
- hosts: machine1
- vars:
-   image_tag: ""
- tasks:
-  - name: execute script on server
-    shell: ../ansible/config-machine-1.sh {{ image_tag|quote }} .
-
 # -
-#  name: Pushing Image to ECR
+#  name: building image
 #  hosts: machine1
+#  vars:
+#    image_tag: ""
 #  tasks:
 #   - name: execute script on server
-#     shell: docker build -t {{ image_tag|quote }} .
+#     shell: ../ansible/config-machine-1.sh {{ image_tag|quote }} .
+
+-
+ name: Pushing Image to ECR
+ hosts: machine1
+ tasks:
+  - name: execute script on server
+    shell: docker build -t {{ image_tag|quote }} .
