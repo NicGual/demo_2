@@ -41,12 +41,10 @@ pipeline {
                 dir('app'){
                     sh "ansible-playbook ../ansible/docker-build.yml --extra-vars='image_tag=${GIT_HASH}' -i ../ansible/inventory.txt -vvv"
                 }
-            }
-
-            steps {
                 echo "ECR repository"
                 echo "${ecr_url}"
             }
+
         }
         stage("Deploying Image") {
            
