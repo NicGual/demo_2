@@ -17,7 +17,7 @@
 -
  name: Pushing Image to ECR
  hosts: machine1
- executable: /home/ubuntu/app
+ chdir: /home/ubuntu/app
  tasks:
   - name: execute script on server
     shell: docker build -t {{ image_tag|quote }} .
