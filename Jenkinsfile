@@ -65,6 +65,16 @@ pipeline {
             }
 
         }
+        stage("Deploying Container"){
+            
+            steps {                
+                echo "Deploying Container"
+                dir('app'){
+                    sh "ansible-playbook ../ansible/docker-deploy.yml --extra-vars='ecr_url=${ecr_url} image_tag=${GIT_HASH}' -i ../ansible/inventory.txt -vvv"
+                }
+            }
+
+        }
         stage("Deploying Image") {
            
             steps {

@@ -1,0 +1,36 @@
+-
+ name: Deploying Application
+ hosts: machine2
+ tasks:
+  - name: Stop Running Containers
+    shell: docker stop $(docker ps --filter status=running -q)
+
+  
+
+  - name: AWS Docker Login
+    shell: aws ecr get-login-password | docker login --username AWS --password-stdin {{ ecr_url }}
+
+  - name: Push Image
+    shell: docker pull {{ ecr_url }}:{{ image_tag }}
+
+  - name: Run Container
+    shell: docker run -d -p 8080:3000 {{ ecr_url }}:{{ image_tag }}
+  
+  - name: Removing All Stopped Containers 
+    shell: docker rm $(docker ps --filter status=exited -q)
+
+
+
+# -
+#  name: Push Image
+#  hosts: machine2
+#  tasks:
+#   - name: execute script on server
+#     shell: docker pull {{ ecr_url }}:{{ image_tag }}
+
+# -
+#  name: Run Container
+#  hosts: machine2
+#  tasks:
+#   - name: execute script on server
+#     shell: docker pull {{ ecr_url }}:{{ image_tag }}
