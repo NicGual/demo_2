@@ -18,7 +18,7 @@ pipeline {
                      sh label: '' , script: 'terraform init -input=false -no-color'
                      sh label: '' , script: 'terraform plan -no-color'
                      sh label: '' , script: 'terraform apply -no-color -auto-approve'
-                     ecr_url= sh (script: "terraform output --raw ecr_url", returnStdout: true)
+                     script {ecr_url= sh (script: "terraform output --raw ecr_url", returnStdout: true)}
                     // sh label: '' , script: 'terraform destroy -no-color -auto-approve'
                 }
                 
