@@ -3,7 +3,7 @@
   hosts: machine1
   tasks:
    - name: execute script on server
-     script: config-machine-1.sh
+     script: ../ansible/config-machine-1.sh
 
 # -
 #  name: building image
