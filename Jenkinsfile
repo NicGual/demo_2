@@ -41,8 +41,6 @@ pipeline {
                 dir('app'){
                     sh "ansible-playbook ../ansible/docker-build.yml --extra-vars='image_tag=${GIT_HASH}' -i ../ansible/inventory.txt -vvv"
                 }
-                echo "ECR repository"
-                echo "${ecr_url}"
             }
 
         }
@@ -57,18 +55,16 @@ pipeline {
                 }
             }
         }
-        // stage("Destroying Old Images"){
+        stage("Destroying Old Images"){
             
-        //     steps {
-        //         echo "ECR repository"
-        //         echo "${ecr_url}"
-        //         echo "Uploading Image"
-        //         dir('app'){
-        //             sh "ansible-playbook ../ansible/docker-destroy.yml --extra-vars='ecr_url=${ecr_url} image_tag=${GIT_HASH}' -i ../ansible/inventory.txt -vvv"
-        //         }
-        //     }
+            steps {                
+                echo "Destroying Image"
+                dir('app'){
+                    sh "ansible-playbook ../ansible/docker-destroy.yml -i ../ansible/inventory.txt -vvv"
+                }
+            }
 
-        // }
+        }
         stage("Deploying Image") {
            
             steps {

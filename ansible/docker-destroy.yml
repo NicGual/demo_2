@@ -1,0 +1,6 @@
+-
+ name: Push Image
+ hosts: machine1
+ tasks:
+  - name: execute script on server
+    shell: docker rmi $(docker images -q) -f
