@@ -1,6 +1,20 @@
 -
- name: Building Image
+ name: AWS Docker Login
  hosts: machine1
  tasks:
   - name: execute script on server
-    shell: docker build -t {{ image_tag|quote }} .
+    shell: aws ecr get-login-password | docker login --username AWS --password-stdin {{ ecr_url }}
+
+-
+ name: Tag image
+ hosts: machine1
+ tasks:
+  - name: execute script on server
+    shell: docker tag {{ image_tag }} {{ ecr_url }}:{{ image_tag }}
+
+-
+ name: Push Image
+ hosts: machine1
+ tasks:
+  - name: execute script on server
+    shell:docker push {{ ecr_url }}:{{ image_tag }}
