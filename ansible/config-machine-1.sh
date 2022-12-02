@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "hola hello"
-echo $1
+docker build -t 7205a9a9b45bde8b78a5b0ee2f7cccd475cc6694 .
 # sudo apt-get update
 # sudo apt-get -y install \
 #     ca-certificates \
