@@ -4,14 +4,13 @@ pipeline {
         buildDiscarder(logRotator(numToKeepStr: '4', artifactNumToKeepStr: '4'))
     }
     environment {
-        GIT_COMMIT_HASH       = sh (script: "git log -n 1 --pretty=format:'%H'", returnStdout: true)
+        GIT_HASH              = sh (script: "git log -n 1 --pretty=format:'%H'", returnStdout: true)
         AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
     }
     stages {
         stage("cloning repo") {
             steps {
-                echo "${GIT_COMMIT_HASH}"
                 echo "Building infrastructure" 
                 sh 'pwd'
                  dir('infrastructure') {              
@@ -38,7 +37,7 @@ pipeline {
             steps {
                 echo "Building app Image"
                 dir('ansible'){
-                    sh 'ansible-playbook provide.yml -i inventory.txt -vvv'
+                    sh "ansible-playbook docker-build.yml --extra-vars='image_tag=${GIT_HASH}' -i inventory.txt -vvv"
                 }
             }
         }
