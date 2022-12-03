@@ -21,7 +21,7 @@
       shell: unzip -o awscliv2.zip
 
     - name: aws install
-      shell: ./aws/install
+      shell: ./aws/install --update
 - 
   name: Configuring AWS CLI
   hosts: machine2
