@@ -1,27 +1,27 @@
-# -
-#  name: Downloading AWS CLI 
-#  hosts: machine2
-#  tasks:
-#   - name: Step 1
-#     get_url:
-#      url: https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
-#      dest: awscliv2.zip
-  
-- 
-  name: installing Unzip & Unzip AWS CLI
+-
+  name: Downloading AWS CLI 
   hosts: machine2
-  become: true
-  tasks: 
-    - name: install unzip
-      apt:
-        name: unzip
-        state: present
+  tasks:
+    - name: Step 1
+      get_url:
+        url: https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
+        dest: awscliv2.zip
+  
+# - 
+#   name: installing Unzip & Unzip AWS CLI
+#   hosts: machine2
+#   become: true
+#   tasks: 
+#     - name: install unzip
+#       apt:
+#         name: unzip
+#         state: present
 
-    # - name: unzipping AWS CLI
-    #   shell: unzip -o awscliv2.zip
+#     - name: unzipping AWS CLI
+#       shell: unzip -o awscliv2.zip
 
-    # - name: aws install
-    #   shell: ./aws/install --update
+#     - name: aws install
+#       shell: ./aws/install --update
 # - 
 #   name: Configuring AWS CLI
 #   hosts: all
