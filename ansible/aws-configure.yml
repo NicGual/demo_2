@@ -1,15 +1,31 @@
 -
- name: Installing & Configuring AWS CLI
+ name: Downloading AWS CLI 
  hosts: machine2
  tasks:
-  - name: installing AWS CLI
-    shell: 
-     curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-     sudo apt -y install unzip
-     unzip awscliv2.zip
-     sudo ./aws/install  
+  - name: Step 1
+    uri:
+     url: https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
+     dest: awscliv2.zip
+  
+- 
+  name: installing Unzip & Unzip AWS CLI
+  hosts: machine2
+  become: true
+  tasks: 
+    - name: install unzip
+      apt:
+        name: unzip
+        state: present
+    - name: unzipping AWS CLI
+      shell: 
+      unzip awscliv2.zip
+      ./aws/install
+- 
+  name: Configuring AWS CLI
+  hosts: machine2
+  tasks: 
+    - name: Configuring Credentials
+      shell: 
+      aws --profile prueba2 configure set aws_access_key_id {{ ak }}
+      aws --profile prueba2 configure set aws_secret_access_key {{ sak }}
 
-  - name: Configuring Credentials
-    shell: 
-     aws --profile prueba2 configure set aws_access_key_id {{ ak }}
-     aws --profile prueba2 configure set aws_secret_access_key {{ sak }}
