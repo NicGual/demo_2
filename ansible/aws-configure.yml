@@ -16,10 +16,12 @@
       apt:
         name: unzip
         state: present
+
     - name: unzipping AWS CLI
-      shell: 
-      unzip awscliv2.zip
-      ./aws/install
+      shell: unzip awscliv2.zip
+
+    - name: aws install
+      shell: ./aws/install
 - 
   name: Configuring AWS CLI
   hosts: machine2
