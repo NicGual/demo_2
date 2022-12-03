@@ -1,6 +1,6 @@
 -
  name: Downloading AWS CLI 
- hosts: machine1
+ hosts: machine2
  tasks:
   - name: Step 1
     get_url:
@@ -9,7 +9,7 @@
   
 - 
   name: installing Unzip & Unzip AWS CLI
-  hosts: machine1
+  hosts: machine2
   become: true
   tasks: 
     - name: install unzip
