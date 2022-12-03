@@ -3,7 +3,7 @@
  hosts: machine2
  tasks:
   - name: Step 1
-    uri:
+    get_url:
      url: https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
      dest: awscliv2.zip
   
