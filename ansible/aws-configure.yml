@@ -7,28 +7,28 @@
         url: https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
         dest: /home/ubuntu/awscliv2.zip
   
-# - 
-#   name: installing Unzip & Unzip AWS CLI
-#   hosts: machine2
-#   become: true
-#   tasks: 
-#     - name: install unzip
-#       apt:
-#         name: unzip
-#         state: present
+- 
+  name: installing Unzip & Unzip AWS CLI
+  hosts: machine2
+  become: true
+  tasks: 
+    - name: install unzip
+      apt:
+        name: unzip
+        state: present
 
-#     - name: unzipping AWS CLI
-#       shell: unzip -o awscliv2.zip
+    - name: unzipping AWS CLI
+      shell: unzip -o awscliv2.zip
 
-#     - name: aws install
-#       shell: ./aws/install --update
-# - 
-#   name: Configuring AWS CLI
-#   hosts: all
-#   tasks: 
-#     - name: Giving AK
-#       shell: aws --profile default configure set aws_access_key_id {{ ak }}
+    - name: aws install
+      shell: ./aws/install --update
+- 
+  name: Configuring AWS CLI
+  hosts: all
+  tasks: 
+    - name: Giving AK
+      shell: aws --profile default configure set aws_access_key_id {{ ak }}
 
-#     - name: Giving SAK
-#       shell: aws --profile default configure set aws_secret_access_key {{ sak }}
+    - name: Giving SAK
+      shell: aws --profile default configure set aws_secret_access_key {{ sak }}
 
