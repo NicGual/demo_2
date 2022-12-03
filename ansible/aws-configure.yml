@@ -26,11 +26,9 @@
   name: Configuring AWS CLI
   hosts: machine2
   tasks: 
-    - name: Configuring Credentials
-      shell: 
-      aws --profile prueba2 configure set aws_access_key_id {{ ak }}
+    - name: Giving AK
+      shell: aws --profile prueba2 configure set aws_access_key_id {{ ak }}
 
-    - name: Configuring Credentials
-      shell: 
-      aws --profile prueba2 configure set aws_secret_access_key {{ sak }}
+    - name: Giving SAK
+      shell: aws --profile prueba2 configure set aws_secret_access_key {{ sak }}
 
