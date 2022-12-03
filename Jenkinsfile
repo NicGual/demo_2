@@ -10,30 +10,30 @@ pipeline {
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
     }
     stages {
-        stage("Building Infrastructure") {
-            steps {
-                echo "Building infrastructure" 
-                sh 'pwd'
-                 dir('infrastructure') {              
-                     sh label: '' , script: 'terraform init -input=false -no-color'
-                     sh label: '' , script: 'terraform plan -no-color'
-                     sh label: '' , script: 'terraform apply -no-color -auto-approve'
-                     script {ecr_url= sh (script: "terraform output --raw ecr_url", returnStdout: true)}
-                    //  sh label: '' , script: 'terraform destroy -no-color -auto-approve'
-                }
+        // stage("Building Infrastructure") {
+        //     steps {
+        //         echo "Building infrastructure" 
+        //         sh 'pwd'
+        //          dir('infrastructure') {              
+        //              sh label: '' , script: 'terraform init -input=false -no-color'
+        //              sh label: '' , script: 'terraform plan -no-color'
+        //              sh label: '' , script: 'terraform apply -no-color -auto-approve'
+        //              script {ecr_url= sh (script: "terraform output --raw ecr_url", returnStdout: true)}
+        //             //  sh label: '' , script: 'terraform destroy -no-color -auto-approve'
+        //         }
                 
-            }
-        }
+        //     }
+        // }
         
-        stage("Providing Files") {
-            steps {
-                echo "copying app" 
-                dir('ansible'){
-                    sh 'ansible-playbook provide.yml -i inventory.txt '
-                }
-            }
+        // stage("Providing Files") {
+        //     steps {
+        //         echo "copying app" 
+        //         dir('ansible'){
+        //             sh 'ansible-playbook provide.yml -i inventory.txt '
+        //         }
+        //     }
             
-        }
+        // }
 
         stage("Install & Configure AWS CLI"){
             
