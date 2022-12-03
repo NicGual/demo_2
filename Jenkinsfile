@@ -45,54 +45,54 @@ pipeline {
             }
         }
 
-        stage("Building Images"){
+        // stage("Building Images"){
             
-            steps {
-                echo "Building app Image"
-                dir('app'){
-                    sh "ansible-playbook ../ansible/docker-build.yml --extra-vars='image_tag=${GIT_HASH}' -i ../ansible/inventory.txt -vvv"
-                }
-            }
+        //     steps {
+        //         echo "Building app Image"
+        //         dir('app'){
+        //             sh "ansible-playbook ../ansible/docker-build.yml --extra-vars='image_tag=${GIT_HASH}' -i ../ansible/inventory.txt -vvv"
+        //         }
+        //     }
 
-        }
-        stage("Uploading image to ECR"){
+        // }
+        // stage("Uploading image to ECR"){
             
-            steps {
-                echo "ECR repository"
-                echo "${ecr_url}"
-                echo "Uploading Image"
-                dir('app'){
-                    sh "ansible-playbook ../ansible/docker-push.yml --extra-vars='ecr_url=${ecr_url} image_tag=${GIT_HASH}' -i ../ansible/inventory.txt -vvv"
-                }
-            }
-        }
-        stage("Destroying Old Images"){
+        //     steps {
+        //         echo "ECR repository"
+        //         echo "${ecr_url}"
+        //         echo "Uploading Image"
+        //         dir('app'){
+        //             sh "ansible-playbook ../ansible/docker-push.yml --extra-vars='ecr_url=${ecr_url} image_tag=${GIT_HASH}' -i ../ansible/inventory.txt -vvv"
+        //         }
+        //     }
+        // }
+        // stage("Destroying Old Images"){
             
-            steps {                
-                echo "Destroying Image"
-                dir('app'){
-                    sh "ansible-playbook ../ansible/docker-destroy.yml -i ../ansible/inventory.txt -vvv"
-                }
-            }
-        }
+        //     steps {                
+        //         echo "Destroying Image"
+        //         dir('app'){
+        //             sh "ansible-playbook ../ansible/docker-destroy.yml -i ../ansible/inventory.txt -vvv"
+        //         }
+        //     }
+        // }
         
-        stage("Deploying Container"){
+        // stage("Deploying Container"){
             
-            steps {                
-                echo "Deploying Container"
-                dir('app'){
-                    sh "ansible-playbook ../ansible/docker-deploy.yml --extra-vars='ecr_url=${ecr_url} image_tag=${GIT_HASH}' -i ../ansible/inventory.txt -vvv"
-                }
-            }
+        //     steps {                
+        //         echo "Deploying Container"
+        //         dir('app'){
+        //             sh "ansible-playbook ../ansible/docker-deploy.yml --extra-vars='ecr_url=${ecr_url} image_tag=${GIT_HASH}' -i ../ansible/inventory.txt -vvv"
+        //         }
+        //     }
 
-        }
-        stage("Deploying Image") {
+        // }
+        // stage("Deploying Image") {
            
-            steps {
-                script {
-                    echo "deploying..."
-                }
-            }
-        }
+        //     steps {
+        //         script {
+        //             echo "deploying..."
+        //         }
+        //     }
+        // }
     }
 }
