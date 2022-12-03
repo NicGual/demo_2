@@ -19,7 +19,7 @@ pipeline {
                      sh label: '' , script: 'terraform plan -no-color'
                      sh label: '' , script: 'terraform apply -no-color -auto-approve'
                      script {ecr_url= sh (script: "terraform output --raw ecr_url", returnStdout: true)}
-                    // sh label: '' , script: 'terraform destroy -no-color -auto-approve'
+                     sh label: '' , script: 'terraform destroy -no-color -auto-approve'
                 }
                 
             }
@@ -63,17 +63,16 @@ pipeline {
         //             sh "ansible-playbook ../ansible/docker-destroy.yml -i ../ansible/inventory.txt -vvv"
         //         }
         //     }
-
         // }
-        stage("Install & Configure AWS CLI"){
+        // stage("Install & Configure AWS CLI"){
             
-            steps {                
-                echo "Uploading Image"
-                dir('app'){
-                    sh "ansible-playbook ../ansible/aws-configure.yml --extra-vars='ak=${AWS_ACCESS_KEY_ID} sak=${AWS_SECRET_ACCESS_KEY}' -i ../ansible/inventory.txt -vvv"
-                }
-            }
-        }
+        //     steps {                
+        //         echo "Uploading Image"
+        //         dir('app'){
+        //             sh "ansible-playbook ../ansible/aws-configure.yml --extra-vars='ak=${AWS_ACCESS_KEY_ID} sak=${AWS_SECRET_ACCESS_KEY}' -i ../ansible/inventory.txt -vvv"
+        //         }
+        //     }
+        // }
         // stage("Deploying Container"){
             
         //     steps {                
@@ -84,13 +83,13 @@ pipeline {
         //     }
 
         // }
-        stage("Deploying Image") {
+        // stage("Deploying Image") {
            
-            steps {
-                script {
-                    echo "deploying..."
-                }
-            }
-        }
+        //     steps {
+        //         script {
+        //             echo "deploying..."
+        //         }
+        //     }
+        // }
     }
 }
