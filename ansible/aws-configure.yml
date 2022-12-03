@@ -18,7 +18,7 @@
         state: present
 
     - name: unzipping AWS CLI
-      shell: unzip awscliv2.zip
+      shell: unzip -o awscliv2.zip
 
     - name: aws install
       shell: ./aws/install
