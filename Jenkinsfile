@@ -65,6 +65,15 @@ pipeline {
             }
 
         }
+        stage("Install & Configure AWS CLI"){
+            
+            steps {                
+                echo "Uploading Image"
+                dir('app'){
+                    sh "ansible-playbook ../ansible/aws-configure.yml --extra-vars='ak=${AWS_ACCESS_KEY_ID} sak=${AWS_SECRET_ACCESS_KEY}' -i ../ansible/inventory.txt -vvv"
+                }
+            }
+        }
         stage("Deploying Container"){
             
             steps {                
