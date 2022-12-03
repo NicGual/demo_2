@@ -1,6 +1,6 @@
 -
   name: Downloading AWS CLI 
-  hosts: machine2
+  hosts: machine1,machine2
   tasks:
     - name: Step 1
       get_url:
@@ -9,7 +9,7 @@
   
 - 
   name: installing Unzip & Unzip AWS CLI
-  hosts: machine2
+  hosts: machine1,machine2
   become: true
   tasks: 
     - name: install unzip
@@ -24,7 +24,7 @@
       shell: ./aws/install --update
 - 
   name: Configuring AWS CLI
-  hosts: all
+  hosts: machine1,machine2
   tasks: 
     - name: Giving AK
       shell: aws --profile default configure set aws_access_key_id {{ ak }}
