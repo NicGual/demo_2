@@ -1,12 +1,12 @@
-terraform {
-    backend "s3" {
-      bucket    = "demo-state-${var.PROJECT_ID}"
-      key       = "application-state/demo/terraform.tfstate"
-      region    = var.AWS_REGION
-      encrypt   = true
-    }
+# terraform {
+#     backend "s3" {
+#       bucket    = "demo-state-${var.PROJECT_ID}"
+#       key       = "application-state/demo/terraform.tfstate"
+#       region    = var.AWS_REGION
+#       encrypt   = true
+#     }
     
-}
+# }
 
 resource "aws_s3_bucket" "application-state" {
 

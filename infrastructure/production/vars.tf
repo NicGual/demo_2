@@ -6,6 +6,10 @@ variable "PROJECT_ID" {
   default = "100283722"
 }
 
+variable "PROJECT_NAME" {
+  default = "Demo-App"
+}
+
 variable "PATH_TO_PRIVATE_KEY_1" {
   default = "keys-machine-1"
 }

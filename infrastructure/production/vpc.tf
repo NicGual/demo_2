@@ -19,6 +19,17 @@ resource "aws_subnet" "main-public-vpc" {
     Name = "main-public-vpc"
   }
 }
+
+resource "aws_subnet" "main-public-vpc-2" {
+  vpc_id                  = aws_vpc.main-application-vpc.id
+  cidr_block              = "10.0.2.0/24"
+  map_public_ip_on_launch = "true"
+  availability_zone       = "us-east-1b"
+
+  tags = {
+    Name = "main-public-vpc-2"
+  }
+}
 #Private Subnets
 # resource "aws_subnet" "main-private-subnet" {
 #   vpc_id                  = aws_vpc.main-application-vpc.id

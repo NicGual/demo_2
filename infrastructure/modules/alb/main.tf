@@ -1,24 +1,24 @@
 # create application load balancer
 resource "aws_lb" "application_load_balancer" {
-  name               = "${var.app_name}-alb"
+  name               = "${var.APP_NAME}-alb"
   internal           = false
   load_balancer_type = "application"
-  security_groups    = []
-  subnets            = []
-  enable_deletion_protection = 
+  security_groups    = [var.ALB_SECURITY_GROUP]
+  subnets            = [var.PUBLIC_SUBNET_1_ID,var.PUBLIC_SUBNET_2_ID]
+  enable_deletion_protection = false
 
   tags   = {
-    Name = "${}-alb"
+    Name = "${var.APP_NAME}-alb"
   }
 }
 
 # create target group
 resource "aws_lb_target_group" "alb_target_group" {
-  name        = "${}-tg"
-  target_type = 
-  port        = 
-  protocol    = 
-  vpc_id      = 
+  name        = "${${var.APP_NAME}}-alb-tg"
+  target_type = "ip"
+  port        = 80
+  protocol    = "HTTP"
+  vpc_id      = var.VPC_ID
 
   health_check {
     enabled             = true
@@ -31,15 +31,15 @@ resource "aws_lb_target_group" "alb_target_group" {
   }
 
   lifecycle {
-    create_before_destroy = 
+    create_before_destroy = true
   }
 }
 
 # create a listener on port 80 with redirect action
 resource "aws_lb_listener" "alb_http_listener" {
-  load_balancer_arn = 
-  port              = 
-  protocol          = 
+  load_balancer_arn = aws_lb.application_load_balancer.arn
+  port              = 80
+  protocol          = "HTTP"
 
   default_action {
     type = "redirect"
@@ -54,14 +54,14 @@ resource "aws_lb_listener" "alb_http_listener" {
 
 # create a listener on port 443 with forward action
 resource "aws_lb_listener" "alb_https_listener" {
-  load_balancer_arn  = 
-  port               = 
-  protocol           = 
+  load_balancer_arn  = aws_lb.application_load_balancer.arn
+  port               = 443
+  protocol           = "HTTPS"
   ssl_policy         = "ELBSecurityPolicy-2016-08"
-  certificate_arn    = 
+  #certificate_arn    = var.CERTIFICATE_ARN
 
   default_action {
-    type             = 
-    target_group_arn = 
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.alb_target_group.arn
   }
 }
