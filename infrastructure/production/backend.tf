@@ -23,7 +23,7 @@ resource "aws_s3_bucket" "application-state" {
     server_side_encryption_configuration {
 
         rule {
-            apply_server_side_centryption_by_default {
+            apply_server_side_encryption_by_default {
 
                 sse_algorithm = "AES256"
             }
