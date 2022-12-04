@@ -11,18 +11,18 @@ variable "PROJECT_NAME" {
 }
 
 variable "PATH_TO_PRIVATE_KEY_1" {
-  default = "keys-machine-1"
+  default = "../keys-machine-1"
 }
 
 variable "PATH_TO_PUBLIC_KEY_1" {
-  default = "keys-machine-1.pub"
+  default = "../keys-machine-1.pub"
 }
 variable "PATH_TO_PRIVATE_KEY_2" {
-  default = "keys-machine-2"
+  default = "../keys-machine-2"
 }
 
 variable "PATH_TO_PUBLIC_KEY_2" {
-  default = "keys-machine-2.pub"
+  default = "../keys-machine-2.pub"
 }
 variable "AMIS" {
   type = map(string)
