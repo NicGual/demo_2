@@ -1,8 +1,8 @@
 terraform {
     backend "s3" {
-      bucket    = "demo-state-${var.PROJECT_ID}"
+      bucket    = "demo-state-100283722"
       key       = "application-state/demo/terraform.tfstate"
-      region    = var.AWS_REGION
+      region    = "us-east-1"
       encrypt   = true
     }
     
