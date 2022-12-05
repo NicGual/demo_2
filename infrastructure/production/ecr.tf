@@ -1,4 +1,4 @@
-resource "aws_ecr_repository" "app-image-storage" {
+resource "aws_ecr_repository" "app-image-storage-production" {
   name = "app-images"
   image_tag_mutability = "IMMUTABLE"
 }
