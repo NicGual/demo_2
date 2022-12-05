@@ -1,6 +1,6 @@
 -
- name: Push Image
- hosts: machine1
+ name: destroy built images
+ hosts: build
  tasks:
   - name: execute script on server
     shell: docker rmi $(docker images -q) -f
