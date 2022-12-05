@@ -15,7 +15,7 @@ resource "aws_instance" "machine-1" {
     Name = "machine-1"
   }
   provisioner "file" {
-    source      = "../config/docker-install.sh"
+    source      = "../../config/docker-install.sh"
     destination = "/tmp/docker-install.sh"
   }
 
@@ -55,7 +55,7 @@ resource "aws_instance" "machine-2" {
   }
 
   provisioner "file" {
-    source      = "../config/docker-install.sh"
+    source      = "../../config/docker-install.sh"
     destination = "/tmp/docker-install.sh"
   }
 
