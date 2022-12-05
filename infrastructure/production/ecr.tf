@@ -4,7 +4,7 @@ resource "aws_ecr_repository" "app-image-storage-production" {
 }
 
 resource "aws_ecr_lifecycle_policy" "app-images-policy" {
-  repository = aws_ecr_repository.app-image-storage.name
+  repository = aws_ecr_repository.app-image-storage-production.name
 
   policy = <<EOF
 {

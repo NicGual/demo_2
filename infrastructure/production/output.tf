@@ -7,5 +7,5 @@ output machine_2_ip {
 }
 
 output "ecr_url" {
-  value = aws_ecr_repository.app-image-storage.repository_url
+  value = aws_ecr_repository.app-image-storage-production.repository_url
 }
