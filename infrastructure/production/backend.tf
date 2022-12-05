@@ -13,7 +13,7 @@ resource "aws_s3_bucket" "application-state" {
     bucket = "demo-state-${var.PROJECT_ID}"
 
     lifecycle {
-        prevent_destroy = true 
+        prevent_destroy = false 
     }
 
     versioning {
