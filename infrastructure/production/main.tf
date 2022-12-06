@@ -6,5 +6,6 @@ module alb {
   PUBLIC_SUBNET_1_ID = aws_subnet.main-public-vpc.id
   PUBLIC_SUBNET_2_ID = aws_subnet.main-public-vpc-2.id
   VPC_ID             = aws_vpc.main-application-vpc.id
+  TARGET_INSTANCES   = [aws_instance.machine-1.id,aws_instance.machine-2.id,aws_instance.machine-3.id]
   #CERTIFICATE_ARN    = 
 }
