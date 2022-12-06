@@ -45,14 +45,14 @@ pipeline {
             }
         }
 
-        // stage("Building Images"){
+        stage("Building Images"){
             
-        //     steps {
-        //         echo "Building app Image"
-        //         dir('app'){
-        //             sh "ansible-playbook ../ansible/docker-build.yml --extra-vars='image_tag=${GIT_HASH}' -i ../ansible/inventory.txt -vvv"
-        //         }
-        //     }
+            steps {
+                echo "Building app Image"
+                dir('app'){
+                    sh "ansible-playbook ../ansible/docker-build.yml --extra-vars='image_tag=${GIT_HASH}' -i ../ansible/inventory.txt -vvv"
+                }
+            }
 
         // }
         // stage("Uploading image to ECR"){
