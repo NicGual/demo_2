@@ -54,7 +54,7 @@ pipeline {
                 }
             }
 
-        // }
+        }
         // stage("Uploading image to ECR"){
             
         //     steps {
