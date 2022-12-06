@@ -3,7 +3,7 @@
  hosts: deploy
  tasks:
   - name: Stop Running Containers
-    shell: docker stop $(docker ps --filter status=running -q) 
+    shell: docker stop $(docker ps --filter status=running -q) || true
 
   
 
@@ -17,4 +17,4 @@
     shell: docker run -d -p 8080:3000 {{ ecr_url }}:{{ image_tag }}
   
   - name: Removing All Stopped Containers 
-    shell: docker rm $(docker ps --filter status=exited -q)
+    shell: docker rm $(docker ps --filter status=exited -q) || true
