@@ -1,20 +1,20 @@
 -
  name: AWS Docker Login
- hosts: deploy
+ hosts: build
  tasks:
   - name: execute script on server
     shell: aws ecr get-login-password | docker login --username AWS --password-stdin {{ ecr_url }}
 
 -
  name: Tag image
- hosts: deploy
+ hosts: build
  tasks:
   - name: execute script on server
     shell: docker tag {{ image_tag }} {{ ecr_url }}:{{ image_tag }}
 
 -
  name: Push Image
- hosts: deploy
+ hosts: build
  tasks:
   - name: execute script on server
     shell: docker push {{ ecr_url }}:{{ image_tag }}
