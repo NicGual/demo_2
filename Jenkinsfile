@@ -35,15 +35,15 @@ pipeline {
             
         }
 
-        // stage("Install & Configure AWS CLI"){
+        stage("Install & Configure AWS CLI"){
             
-        //     steps {                
-        //         echo "Configuring AWS CLI on machines"
-        //         dir('app'){
-        //             sh 'ansible-playbook ../ansible/aws-configure.yml --extra-vars="ak=$AWS_ACCESS_KEY_ID sak=$AWS_SECRET_ACCESS_KEY" -i ../ansible/inventory.txt -vvv'
-        //         }
-        //     }
-        // }
+            steps {                
+                echo "Configuring AWS CLI on machines"
+                dir('app'){
+                    sh 'ansible-playbook ../ansible/aws-configure.yml --extra-vars="ak=$AWS_ACCESS_KEY_ID sak=$AWS_SECRET_ACCESS_KEY" -i ../ansible/inventory.txt -vvv'
+                }
+            }
+        }
 
         // stage("Building Images"){
             
