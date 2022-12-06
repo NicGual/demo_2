@@ -55,17 +55,17 @@ pipeline {
             }
 
         }
-        // stage("Uploading image to ECR"){
+        stage("Uploading image to ECR"){
             
-        //     steps {
-        //         echo "ECR repository"
-        //         echo "${ecr_url}"
-        //         echo "Uploading Image"
-        //         dir('app'){
-        //             sh "ansible-playbook ../ansible/docker-push.yml --extra-vars='ecr_url=${ecr_url} image_tag=${GIT_HASH}' -i ../ansible/inventory.txt -vvv"
-        //         }
-        //     }
-        // }
+            steps {
+                echo "ECR repository"
+                echo "${ecr_url}"
+                echo "Uploading Image"
+                dir('app'){
+                    sh "ansible-playbook ../ansible/docker-push.yml --extra-vars='ecr_url=${ecr_url} image_tag=${GIT_HASH}' -i ../ansible/inventory.txt -vvv"
+                }
+            }
+        }
         // stage("Destroying Old Images"){
             
         //     steps {                
