@@ -19,53 +19,53 @@ pipeline {
                      sh label: '' , script: 'terraform plan -no-color'
                      sh label: '' , script: 'terraform apply -no-color -auto-approve'
                      script {ecr_url= sh (script: "terraform output --raw ecr_url", returnStdout: true)}
-                    // sh label: '' , script: 'terraform destroy -no-color -auto-approve'
+                     sh label: '' , script: 'terraform destroy -no-color -auto-approve'
                 }
                 
             }
         }
         
-        stage("Providing Files") {
-            steps {
-                echo "copying app" 
-                dir('ansible'){
-                    sh 'ansible-playbook provide.yml -i inventory.txt '
-                }
-            }
+        // stage("Providing Files") {
+        //     steps {
+        //         echo "copying app" 
+        //         dir('ansible'){
+        //             sh 'ansible-playbook provide.yml -i inventory.txt '
+        //         }
+        //     }
             
-        }
+        // }
 
-        stage("Install & Configure AWS CLI"){
+        // stage("Install & Configure AWS CLI"){
             
-            steps {                
-                echo "Configuring AWS CLI on machines"
-                dir('app'){
-                    sh 'ansible-playbook ../ansible/aws-configure.yml --extra-vars="ak=$AWS_ACCESS_KEY_ID sak=$AWS_SECRET_ACCESS_KEY" -i ../ansible/inventory.txt -vvv'
-                }
-            }
-        }
+        //     steps {                
+        //         echo "Configuring AWS CLI on machines"
+        //         dir('app'){
+        //             sh 'ansible-playbook ../ansible/aws-configure.yml --extra-vars="ak=$AWS_ACCESS_KEY_ID sak=$AWS_SECRET_ACCESS_KEY" -i ../ansible/inventory.txt -vvv'
+        //         }
+        //     }
+        // }
 
-        stage("Building Images"){
+        // stage("Building Images"){
             
-            steps {
-                echo "Building app Image"
-                dir('app'){
-                    sh "ansible-playbook ../ansible/docker-build.yml --extra-vars='image_tag=${GIT_HASH}' -i ../ansible/inventory.txt -vvv"
-                }
-            }
+        //     steps {
+        //         echo "Building app Image"
+        //         dir('app'){
+        //             sh "ansible-playbook ../ansible/docker-build.yml --extra-vars='image_tag=${GIT_HASH}' -i ../ansible/inventory.txt -vvv"
+        //         }
+        //     }
 
-        }
-        stage("Uploading image to ECR"){
+        // }
+        // stage("Uploading image to ECR"){
             
-            steps {
-                echo "ECR repository"
-                echo "${ecr_url}"
-                echo "Uploading Image"
-                dir('app'){
-                    sh "ansible-playbook ../ansible/docker-push.yml --extra-vars='ecr_url=${ecr_url} image_tag=${GIT_HASH}' -i ../ansible/inventory.txt -vvv"
-                }
-            }
-        }
+        //     steps {
+        //         echo "ECR repository"
+        //         echo "${ecr_url}"
+        //         echo "Uploading Image"
+        //         dir('app'){
+        //             sh "ansible-playbook ../ansible/docker-push.yml --extra-vars='ecr_url=${ecr_url} image_tag=${GIT_HASH}' -i ../ansible/inventory.txt -vvv"
+        //         }
+        //     }
+        // }
         // stage("Destroying Old Images"){
             
         //     steps {                
