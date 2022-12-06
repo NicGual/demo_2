@@ -1,6 +1,6 @@
 -
  name: copying files
- hosts: machine1
+ hosts: build
  tasks:
   - name: directory copy to remote device
     copy:

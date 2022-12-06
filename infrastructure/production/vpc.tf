@@ -67,3 +67,8 @@ resource "aws_route_table_association" "main-public-vpc-a" {
   subnet_id      = aws_subnet.main-public-vpc.id
   route_table_id = aws_route_table.main-public-rt.id
 }
+
+resource "aws_route_table_association" "main-public-vpc-b" {
+  subnet_id      = aws_subnet.main-public-vpc-2.id
+  route_table_id = aws_route_table.main-public-rt.id
+}

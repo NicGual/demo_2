@@ -24,6 +24,23 @@ variable "PATH_TO_PRIVATE_KEY_2" {
 variable "PATH_TO_PUBLIC_KEY_2" {
   default = "../keys-machine-2.pub"
 }
+
+variable "PATH_TO_PRIVATE_KEY_3" {
+  default = "../keys-machine-3"
+}
+
+variable "PATH_TO_PUBLIC_KEY_3" {
+  default = "../keys-machine-3.pub"
+}
+
+variable "PATH_TO_PRIVATE_KEY_4" {
+  default = "../keys-machine-4"
+}
+
+variable "PATH_TO_PUBLIC_KEY_4" {
+  default = "../keys-machine-4.pub"
+}
+
 variable "AMIS" {
   type = map(string)
   default = {
