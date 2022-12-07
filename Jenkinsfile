@@ -10,7 +10,24 @@ pipeline {
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
     }
     stages {
-        stage("Building Infrastructure") {
+        stage("Building Production Infrastructure") {
+            when { branch 'main' }
+            steps {
+                echo "Building infrastructure" 
+                sh 'pwd'
+                 dir('infrastructure/production') {              
+                     sh label: '' , script: 'terraform init -force-copy -no-color'
+                     sh label: '' , script: 'terraform plan -no-color'
+                     sh label: '' , script: 'terraform apply -no-color -auto-approve'
+                     script {ecr_url= sh (script: "terraform output --raw ecr_url", returnStdout: true)}
+                    // sh label: '' , script: 'terraform destroy -no-color -auto-approve'
+                
+                }
+                
+            }
+        }
+        stage("Building development Infrastructure") {
+            when { branch 'Development' }
             steps {
                 echo "Building infrastructure" 
                 sh 'pwd'
