@@ -41,15 +41,15 @@ pipeline {
             }
         }
         
-        // stage("Providing Files") {
-        //     steps {
-        //         echo "copying app" 
-        //         dir('ansible'){
-        //             sh 'ansible-playbook provide.yml -i inventory.txt '
-        //         }
-        //     }
+        stage("Providing Files") {
+            steps {
+                echo "copying app" 
+                dir('ansible'){
+                    sh 'ansible-playbook provide.yml -i inventory.txt '
+                }
+            }
             
-        // }
+        }
 
         // stage("Install & Configure AWS CLI"){
             
