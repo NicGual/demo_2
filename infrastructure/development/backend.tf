@@ -13,7 +13,7 @@ resource "aws_s3_bucket" "dev-infra-state" {
     bucket = "dev-branch-state-100283722"
 
     lifecycle {
-        prevent_destroy = true 
+        prevent_destroy = false 
     }
 
     versioning {
