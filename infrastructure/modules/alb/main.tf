@@ -24,7 +24,7 @@ resource "aws_lb_target_group" "alb_target_group" {
     enabled             = true
     interval            = 300
     path                = "/"
-    timeout             = 60
+    timeout             = 65
     matcher             = 200
     healthy_threshold   = 5
     unhealthy_threshold = 5
