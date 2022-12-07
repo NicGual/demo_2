@@ -1,6 +1,6 @@
 -
  name: destroy built images
- hosts: machine1
+ hosts: build
  tasks:
   - name: execute script on server
     shell: docker rmi $(docker images -q) -f

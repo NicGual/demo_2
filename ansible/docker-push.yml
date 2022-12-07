@@ -1,6 +1,6 @@
 -
  name: AWS Docker Login
- hosts: machine1
+ hosts: build
  tasks:
   - name: execute script on server
     shell: aws ecr get-login-password | docker login --username AWS --password-stdin {{ ecr_url }}
