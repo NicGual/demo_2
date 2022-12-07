@@ -10,7 +10,7 @@
 
 resource "aws_s3_bucket" "dev-infra-state" {
 
-    bucket = "dev-branch-state-${var.PROJECT_ID}"
+    bucket = "dev-branch-state-100283722"
 
     lifecycle {
         prevent_destroy = true 
