@@ -37,7 +37,7 @@ resource "aws_instance" "dev-machine-1" {
   
 }
 
-resource "aws_instance" "machine-2" {
+resource "aws_instance" "dev-machine-2" {
   ami           = var.AMIS[var.AWS_REGION]
   instance_type = "t2.micro"
 
