@@ -43,6 +43,7 @@ pipeline {
         }
         
         stage("Providing Files") {
+            when { anyOf { branch 'main'; branch 'Development' } }
             steps {
                 echo "copying app" 
                 dir('ansible'){
@@ -53,63 +54,55 @@ pipeline {
         }
 
         stage("Install & Configure AWS CLI"){
-            
+             when { anyOf { branch 'main'; branch 'Development' } }
             steps {                
                 echo "Configuring AWS CLI on machines"
-                dir('app'){
-                    sh 'ansible-playbook ../ansible/aws-configure.yml --extra-vars="ak=$AWS_ACCESS_KEY_ID sak=$AWS_SECRET_ACCESS_KEY" -i ../ansible/inventory.txt -vvv'
+                dir('ansible'){
+                    sh 'ansible-playbook aws-configure.yml --extra-vars="ak=$AWS_ACCESS_KEY_ID sak=$AWS_SECRET_ACCESS_KEY" -i inventory.txt -vvv'
                 }
             }
         }
 
         stage("Building Images"){
-            
+             when { anyOf { branch 'main'; branch 'Development' } }
             steps {
                 echo "Building app Image"
-                dir('app'){
-                    sh "ansible-playbook ../ansible/docker-build.yml --extra-vars='image_tag=${GIT_HASH}' -i ../ansible/inventory.txt -vvv"
+                dir('ansible'){
+                    sh "ansible-playbook docker-build.yml --extra-vars='image_tag=${GIT_HASH}' -i inventory.txt -vvv"
                 }
             }
 
         }
         stage("Uploading image to ECR"){
-            
+             when { anyOf { branch 'main'; branch 'Development' } }
             steps {
                 echo "ECR repository"
                 echo "${ecr_url}"
                 echo "Uploading Image"
-                dir('app'){
-                    sh "ansible-playbook ../ansible/docker-push.yml --extra-vars='ecr_url=${ecr_url} image_tag=${GIT_HASH}' -i ../ansible/inventory.txt -vvv"
+                dir('ansible'){
+                    sh "ansible-playbook docker-push.yml --extra-vars='ecr_url=${ecr_url} image_tag=${GIT_HASH}' -i inventory.txt -vvv"
                 }
             }
         }
         stage("Destroying Old Images"){
-            
+             when { anyOf { branch 'main'; branch 'Development' } }
             steps {                
                 echo "Destroying Image"
-                dir('app'){
-                    sh "ansible-playbook ../ansible/docker-destroy.yml -i ../ansible/inventory.txt -vvv"
+                dir('ansible'){
+                    sh "ansible-playbook docker-destroy.yml -i inventory.txt -vvv"
                 }
             }
         }
         
-        stage("Deploying Container"){
-            
+        stage("Deploying App"){
+             when { anyOf { branch 'main'; branch 'Development' } }
             steps {                
-                echo "Deploying Container"
-                dir('app'){
-                    sh "ansible-playbook ../ansible/docker-deploy.yml --extra-vars='ecr_url=${ecr_url} image_tag=${GIT_HASH}' -i ../ansible/inventory.txt -vvv"
+                echo "Deploying App"
+                dir('ansible'){
+                    sh "ansible-playbook docker-deploy.yml --extra-vars='ecr_url=${ecr_url} image_tag=${GIT_HASH}' -i inventory.txt -vvv"
                 }
             }
 
-        }
-        stage("Deploying Image") {
-           
-            steps {
-                script {
-                    echo "deploying..."
-                }
-            }
         }
     }
 }
