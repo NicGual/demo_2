@@ -1,6 +1,6 @@
 import React from "react";
 import "./CustomButton.css"
-const CustomButton = ({type="", placeholder="", className="", id="", onclick}) => {
+const CustomButton = ({type="", placeholder="", className="", id="", onclick = () => {}}) => {
     return(
         <>
             <div className={`${className} button-container`}>
