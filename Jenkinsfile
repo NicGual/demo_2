@@ -24,7 +24,7 @@ pipeline {
                             returnStatus: true
                         )
                     }
-                    sh 'echo UNIT_TESTS_RESULTS'
+                    sh 'echo ${UNIT_TESTS_RESULTS}'
                 }
             }            
         }
