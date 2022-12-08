@@ -16,9 +16,15 @@ pipeline {
             when { anyOf { branch 'Development' } }
             steps {
                 echo "Testing Component" 
-                dir('app'){
+                dir('app'){                    
                     sh 'npm install'
-                    sh 'npm test'
+                    script {
+                        UNIT_TESTS_RESULTS = sh (
+                            script: "npm test",
+                            returnStatus: true
+                        )
+                    }
+                    sh 'echo UNIT_TESTS_RESULTS'
                 }
             }            
         }
