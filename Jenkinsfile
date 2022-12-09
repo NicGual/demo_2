@@ -9,7 +9,21 @@ pipeline {
         AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
     }
+    
+
     stages {
+        stage("unit tests") {
+            when { anyOf {  branch 'DD2-*'; branch 'Development' } }
+            steps {
+                echo "Testing Component"
+                sh 'cp -r -a app app_test' 
+                dir('app_test'){                  
+                    sh 'npm install'
+                    sh 'npm test'
+                }
+            }            
+        }
+
         stage("Building Production Infrastructure") {
             when { branch 'main' }
             steps {
@@ -20,8 +34,6 @@ pipeline {
                      sh label: '' , script: 'terraform plan -no-color'
                      sh label: '' , script: 'terraform apply -no-color -auto-approve'
                      script {ecr_url= sh (script: "terraform output --raw ecr_url", returnStdout: true)}
-                     sh label: '' , script: 'terraform destroy -no-color -auto-approve'
-                
                 }
                 
             }
@@ -36,7 +48,6 @@ pipeline {
                      sh label: '' , script: 'terraform plan -no-color'
                      sh label: '' , script: 'terraform apply -no-color -auto-approve'
                      script {ecr_url= sh (script: "terraform output --raw ecr_url", returnStdout: true)}
-                    // sh label: '' , script: 'terraform destroy -no-color -auto-approve'
                 }
                 
             }

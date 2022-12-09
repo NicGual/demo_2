@@ -30,17 +30,6 @@ resource "aws_subnet" "main-public-vpc-2" {
     Name = "main-public-vpc-2"
   }
 }
-#Private Subnets
-# resource "aws_subnet" "main-private-subnet" {
-#   vpc_id                  = aws_vpc.main-application-vpc.id
-#   cidr_block              = "10.0.4.0/24"
-#   map_public_ip_on_launch = "false"
-#   availability_zone       = "us-east-1a"
-
-#   tags = {
-#     Name = "main-private-subnet-1"
-#   }
-# }
 
 # Internet GW
 resource "aws_internet_gateway" "main-public-gw" {
