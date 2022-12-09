@@ -6,7 +6,7 @@ describe('CustomButton component', () => {
     let button;
     beforeEach(() => {
         render(<CustomButton className="col-md-10" type="submit" placeholder="Iniciar Sesion" />);
-        button = screen.getByRole('button', { name: 'Iniciar Sesionnn' });
+        button = screen.getByRole('button', { name: 'Iniciar Sesion' });
     })
 
     test('The button renders', () => {
