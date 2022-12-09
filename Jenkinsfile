@@ -21,7 +21,7 @@ pipeline {
                     script {
                         UNIT_TESTS_RESULTS = sh (
                             script: "npm test",
-                            returnStatus: true
+                            returnStdout: true
                         )
                     }
                     sh 'echo $UNIT_TESTS_RESULTS'
