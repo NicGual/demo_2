@@ -15,8 +15,9 @@ pipeline {
         stage("unit tests") {
             when { anyOf {  branch 'DD2-*'; branch 'Development' } }
             steps {
-                echo "Testing Component" 
-                dir('app'){                    
+                echo "Testing Component"
+                sh 'cp -r -a app app_test' 
+                dir('app_test'){                  
                     sh 'npm install'
                     sh 'npm test'
                 }
