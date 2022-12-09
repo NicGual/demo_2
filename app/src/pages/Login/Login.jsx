@@ -18,7 +18,7 @@ const Login = () => {
             <div className="login-page d-flex container">
                 <section className="m-8">
                     <div className="frase">
-                        <h2>Envios a un <span>CLICK</span>  de distancia! ERROR </h2>
+                        <h2>Envios a un <span>CLICK</span>  de distancia!  </h2>
                     </div>
                     <div className="p-4">
                         <img className="delivery-foto pt-4" src="login-instaya.png" alt="delivery" />
