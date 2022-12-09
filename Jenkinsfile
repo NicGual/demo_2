@@ -18,13 +18,7 @@ pipeline {
                 echo "Testing Component" 
                 dir('app'){                    
                     sh 'npm install'
-                    script {
-                        UNIT_TESTS_RESULTS = sh (
-                            script: "npm test",
-                            returnStdout: true
-                        )
-                    }
-                    sh 'echo $UNIT_TESTS_RESULTS'
+                    sh 'npm test'
                 }
             }            
         }
