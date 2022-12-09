@@ -36,7 +36,7 @@ const Login = () => {
                             <CustomInput placeholder="Contraseña" type="password" name="contraseña" id="contraseña"/>
                         </div>                       
                         <div class="row d-flex justify-content-center mb-4 mt-4">
-                            <CustomButton className="col-md-10" type="submit" placeholder="Login" onclick={iniciarSesion}/>
+                            <CustomButton className="col-md-10" type="submit" placeholder="Iniciar Sesion" onclick={iniciarSesion}/>
                         </div>
                     </form>
                     <div className="row d-flex justify-content-center mt-5">
