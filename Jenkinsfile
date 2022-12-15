@@ -24,20 +24,19 @@ pipeline {
     //         }            
     //     }
 
-        // stage("Building s3 bucket & ECR") {
-        //     when { branch 'Development' }
-        //     steps {
-        //         echo "Building infrastructure" 
-        //         sh 'pwd'
-        //          dir('infrastructure/development/static') {              
-        //              sh label: '' , script: 'terraform init -no-color'
-        //              sh label: '' , script: 'terraform plan -no-color'
-        //              sh label: '' , script: 'terraform apply -no-color -auto-approve'
-        //              script {ecr_url= sh (script: "terraform output --raw ecr_url", returnStdout: true)}
-        //         }
-                
-        //     }
-        // }
+        stage("Building s3 bucket & ECR") {
+            when { branch 'Development' }
+            steps {
+                echo "Building infrastructure" 
+                sh 'pwd'
+                 dir('infrastructure/development/static') {              
+                     sh label: '' , script: 'terraform init -no-color'
+                     sh label: '' , script: 'terraform plan -no-color'
+                     sh label: '' , script: 'terraform apply -no-color -auto-approve'
+                     script {ecr_url= sh (script: "terraform output --raw ecr_url", returnStdout: true)}
+                }              
+            }
+        }
 
         // stage("Building Production Infrastructure") {
         //     when { branch 'main' }
@@ -64,7 +63,7 @@ pipeline {
                      sh label: '' , script: 'terraform plan -no-color'
                      sh label: '' , script: 'terraform apply -no-color -auto-approve'
                      script {ecr_url= sh (script: "terraform output --raw ecr_url", returnStdout: true)}
-                     sh label: '' , script: 'terraform destroy -no-color -auto-approve'
+                    // sh label: '' , script: 'terraform destroy -no-color -auto-approve'
                 }
                 
             }
