@@ -12,7 +12,7 @@ pipeline {
     
 
     stages {
-        
+
         stage("unit tests") {
             when { anyOf {  branch 'DD2-*'; branch 'Development' } }
             steps {
@@ -63,73 +63,73 @@ pipeline {
                      sh label: '' , script: 'terraform init -force-copy -no-color'
                      sh label: '' , script: 'terraform plan -no-color'
                      sh label: '' , script: 'terraform apply -no-color -auto-approve'
-                    // sh label: '' , script: 'terraform destroy -no-color -auto-approve'
+                     sh label: '' , script: 'terraform destroy -no-color -auto-approve'
                 }
                 
             }
         }
         
-        stage("Providing Files") {
-            when { anyOf { branch 'main'; branch 'Development' } }
-            steps {
-                echo "copying app" 
-                dir('ansible'){
-                    sh 'ansible-playbook provide.yml --extra-vars="workspace=$WORKSPACE " -i inventory.txt '
-                }
-            }
+        // stage("Providing Files") {
+        //     when { anyOf { branch 'main'; branch 'Development' } }
+        //     steps {
+        //         echo "copying app" 
+        //         dir('ansible'){
+        //             sh 'ansible-playbook provide.yml --extra-vars="workspace=$WORKSPACE " -i inventory.txt '
+        //         }
+        //     }
             
-        }
+        // }
 
-        stage("Install & Configure AWS CLI"){
-             when { anyOf { branch 'main'; branch 'Development' } }
-            steps {                
-                echo "Configuring AWS CLI on machines"
-                dir('ansible'){
-                    sh 'ansible-playbook aws-configure.yml --extra-vars="ak=$AWS_ACCESS_KEY_ID sak=$AWS_SECRET_ACCESS_KEY" -i inventory.txt -vvv'
-                }
-            }
-        }
+        // stage("Install & Configure AWS CLI"){
+        //      when { anyOf { branch 'main'; branch 'Development' } }
+        //     steps {                
+        //         echo "Configuring AWS CLI on machines"
+        //         dir('ansible'){
+        //             sh 'ansible-playbook aws-configure.yml --extra-vars="ak=$AWS_ACCESS_KEY_ID sak=$AWS_SECRET_ACCESS_KEY" -i inventory.txt -vvv'
+        //         }
+        //     }
+        // }
 
-        stage("Building Images"){
-             when { anyOf { branch 'main'; branch 'Development' } }
-            steps {
-                echo "Building app Image"
-                dir('ansible'){
-                    sh "ansible-playbook docker-build.yml --extra-vars='image_tag=${GIT_HASH}' -i inventory.txt -vvv"
-                }
-            }
+        // stage("Building Images"){
+        //      when { anyOf { branch 'main'; branch 'Development' } }
+        //     steps {
+        //         echo "Building app Image"
+        //         dir('ansible'){
+        //             sh "ansible-playbook docker-build.yml --extra-vars='image_tag=${GIT_HASH}' -i inventory.txt -vvv"
+        //         }
+        //     }
 
-        }
-        stage("Uploading image to ECR"){
-             when { anyOf { branch 'main'; branch 'Development' } }
-            steps {
-                echo "ECR repository"
-                echo "${ecr_url}"
-                echo "Uploading Image"
-                dir('ansible'){
-                    sh "ansible-playbook docker-push.yml --extra-vars='ecr_url=${ecr_url} image_tag=${GIT_HASH}' -i inventory.txt -vvv"
-                }
-            }
-        }
-        stage("Destroying Old Images"){
-             when { anyOf { branch 'main'; branch 'Development' } }
-            steps {                
-                echo "Destroying Image"
-                dir('ansible'){
-                    sh "ansible-playbook docker-destroy.yml -i inventory.txt -vvv"
-                }
-            }
-        }
+        // }
+        // stage("Uploading image to ECR"){
+        //      when { anyOf { branch 'main'; branch 'Development' } }
+        //     steps {
+        //         echo "ECR repository"
+        //         echo "${ecr_url}"
+        //         echo "Uploading Image"
+        //         dir('ansible'){
+        //             sh "ansible-playbook docker-push.yml --extra-vars='ecr_url=${ecr_url} image_tag=${GIT_HASH}' -i inventory.txt -vvv"
+        //         }
+        //     }
+        // }
+        // stage("Destroying Old Images"){
+        //      when { anyOf { branch 'main'; branch 'Development' } }
+        //     steps {                
+        //         echo "Destroying Image"
+        //         dir('ansible'){
+        //             sh "ansible-playbook docker-destroy.yml -i inventory.txt -vvv"
+        //         }
+        //     }
+        // }
         
-        stage("Deploying App"){
-             when { anyOf { branch 'main'; branch 'Development' } }
-            steps {                
-                echo "Deploying App"
-                dir('ansible'){
-                    sh "ansible-playbook docker-deploy.yml --extra-vars='ecr_url=${ecr_url} image_tag=${GIT_HASH}' -i inventory.txt -vvv"
-                }
-            }
+        // stage("Deploying App"){
+        //      when { anyOf { branch 'main'; branch 'Development' } }
+        //     steps {                
+        //         echo "Deploying App"
+        //         dir('ansible'){
+        //             sh "ansible-playbook docker-deploy.yml --extra-vars='ecr_url=${ecr_url} image_tag=${GIT_HASH}' -i inventory.txt -vvv"
+        //         }
+        //     }
 
-        }
+        // }
     }
 }
