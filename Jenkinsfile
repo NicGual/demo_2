@@ -26,6 +26,20 @@ pipeline {
         //     }            
         // }
 
+        stage("Building s3 bucket & ECR") {
+            when { branch 'main' }
+            steps {
+                echo "Building infrastructure" 
+                sh 'pwd'
+                 dir('infrastructure/production/static') {              
+                     sh label: '' , script: 'terraform init -force-copy -no-color'
+                     sh label: '' , script: 'terraform plan -no-color'
+                     sh label: '' , script: 'terraform apply -no-color -auto-approve'
+                     script {ecr_url= sh (script: "terraform output --raw ecr_url", returnStdout: true)}
+                }              
+            }
+        }
+
         // stage("Building s3 bucket & ECR") {
         //     when { branch 'Development' }
         //     steps {
@@ -40,21 +54,21 @@ pipeline {
         //     }
         // }
 
-        // stage("Building Production Infrastructure") {
-        //     when { branch 'main' }
-        //     steps {
-        //         echo "Building infrastructure" 
-        //         sh 'pwd'
-        //          dir('infrastructure/production') {              
-        //              sh label: '' , script: 'terraform init -force-copy -no-color'
-        //              sh label: '' , script: 'terraform plan -no-color'
-        //              sh label: '' , script: 'terraform apply -no-color -auto-approve'
-        //              script {ecr_url= sh (script: "terraform output --raw ecr_url", returnStdout: true)}
-        //              sh label: '' , script: 'terraform destroy -no-color -auto-approve'
-        //         }
+        stage("Building Production Infrastructure") {
+            when { branch 'main' }
+            steps {
+                echo "Building infrastructure" 
+                sh 'pwd'
+                 dir('infrastructure/production') {              
+                     sh label: '' , script: 'terraform init -force-copy -no-color'
+                     sh label: '' , script: 'terraform plan -no-color'
+                     sh label: '' , script: 'terraform apply -no-color -auto-approve'
+                     script {ecr_url= sh (script: "terraform output --raw ecr_url", returnStdout: true)}
+                     sh label: '' , script: 'terraform destroy -no-color -auto-approve'
+                }
                 
-        //     }
-        // }
+            }
+        }
 
         stage("Building development Infrastructure") {
             when { branch 'Development' }
@@ -69,8 +83,8 @@ pipeline {
                 }
 
                 
-        //     }
-        // }
+            }
+        }
         
         // stage("Providing Files") {
         //     when { anyOf { branch 'main'; branch 'Development' } }
