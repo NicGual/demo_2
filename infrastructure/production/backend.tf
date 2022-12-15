@@ -8,36 +8,12 @@ terraform {
     
 }
 
-# resource "aws_s3_bucket" "application-state" {
-
-#     bucket = "demo-state-${var.PROJECT_ID}"
-
-#     lifecycle {
-#         prevent_destroy = false 
-#     }
-
-#     versioning {
-#         enabled = true 
-#     }
-
-#     server_side_encryption_configuration {
-
-#         rule {
-#             apply_server_side_encryption_by_default {
-
-#                 sse_algorithm = "AES256"
-#             }
-#         }
-#     }
-
-# }
-
 resource "aws_s3_bucket" "application-state" {
 
     bucket = "demo-state-${var.PROJECT_ID}"
 
     lifecycle {
-        prevent_destroy = false 
+        prevent_destroy = true 
     }
 }
 
