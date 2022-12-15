@@ -1,3 +1,13 @@
+terraform {
+    backend "s3" {
+      bucket    = "static-resources-state-100283722"
+      key       = "dev-static-infra-state/demo/terraform.tfstate"
+      region    = "us-east-1"
+      encrypt   = true
+    }
+    
+}
+
 resource "aws_s3_bucket" "dev-infra-state" {
 
     bucket = "dev-branch-state-100283722"
