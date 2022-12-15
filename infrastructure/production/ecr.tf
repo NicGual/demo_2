@@ -11,12 +11,11 @@ resource "aws_ecr_lifecycle_policy" "app-images-policy" {
     "rules": [
         {
             "rulePriority": 1,
-            "description": "Keep last 3 images",
+            "description": "Keep last 5 images",
             "selection": {
-                "tagStatus": "tagged",
-                "tagPrefixList": ["v"],
+                "tagStatus": "any",
                 "countType": "imageCountMoreThan",
-                "countNumber": 3
+                "countNumber": 5
             },
             "action": {
                 "type": "expire"

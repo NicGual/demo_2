@@ -8,6 +8,30 @@ terraform {
     
 }
 
+# resource "aws_s3_bucket" "dev-infra-state" {
+
+#     bucket = "dev-branch-state-100283722"
+
+#     lifecycle {
+#         prevent_destroy = false 
+#     }
+
+#     versioning {
+#         enabled = true 
+#     }
+
+#     server_side_encryption_configuration {
+
+#         rule {
+#             apply_server_side_encryption_by_default {
+
+#                 sse_algorithm = "AES256"
+#             }
+#         }
+#     }
+
+# }
+
 resource "aws_s3_bucket" "dev-infra-state" {
 
     bucket = "dev-branch-state-100283722"
@@ -15,19 +39,21 @@ resource "aws_s3_bucket" "dev-infra-state" {
     lifecycle {
         prevent_destroy = false 
     }
+}
 
-    versioning {
-        enabled = true 
+resource "aws_s3_bucket_versioning" "versioning-conf" {
+  bucket = aws_s3_bucket.dev-infra-state.id
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
+
+resource "aws_s3_bucket_server_side_encryption_configuration" "sse-conf" {
+  bucket = aws_s3_bucket.dev-infra-state.id
+
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm = "AES256"
     }
-
-    server_side_encryption_configuration {
-
-        rule {
-            apply_server_side_encryption_by_default {
-
-                sse_algorithm = "AES256"
-            }
-        }
-    }
-
+  }
 }
