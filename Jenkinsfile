@@ -12,45 +12,62 @@ pipeline {
     
 
     stages {
-        stage("unit tests") {
-            when { anyOf {  branch 'DD2-*'; branch 'Development' } }
-            steps {
-                echo "Testing Component"
-                sh 'cp -r -a app app_test' 
-                dir('app_test'){                  
-                    sh 'npm install'
-                    sh 'npm test'
-                }
-            }            
-        }
 
-        stage("Building Production Infrastructure") {
-            when { branch 'main' }
-            steps {
-                echo "Building infrastructure" 
-                sh 'pwd'
-                 dir('infrastructure/production') {              
-                     sh label: '' , script: 'terraform init -force-copy -no-color'
-                     sh label: '' , script: 'terraform plan -no-color'
-                    //  sh label: '' , script: 'terraform apply -no-color -auto-approve'
-                    //  script {ecr_url= sh (script: "terraform output --raw ecr_url", returnStdout: true)}
-                    sh label: '' , script: 'terraform destroy -no-color -auto-approve'
-                }
-                
-            }
-        }
-        // stage("Building development Infrastructure") {
+
+        // stage("unit tests") {
+        //     when { anyOf {  branch 'DD2-*'; branch 'Development' } }
+        //     steps {
+        //         echo "Testing Component"
+        //         sh 'cp -r -a app app_test' 
+        //         dir('app_test'){                  
+        //             sh 'npm install'
+        //             sh 'npm test'
+        //         }
+        //     }            
+        // }
+
+        // stage("Building s3 bucket & ECR") {
         //     when { branch 'Development' }
         //     steps {
         //         echo "Building infrastructure" 
         //         sh 'pwd'
-        //          dir('infrastructure/development') {              
+        //          dir('infrastructure/development/static') {              
+        //              sh label: '' , script: 'terraform init -force-copy -no-color'
+        //              sh label: '' , script: 'terraform plan -no-color'
+        //              sh label: '' , script: 'terraform apply -no-color -auto-approve'
+        //              script {ecr_url= sh (script: "terraform output --raw ecr_url", returnStdout: true)}
+        //         }              
+        //     }
+        // }
+
+        // stage("Building Production Infrastructure") {
+        //     when { branch 'main' }
+        //     steps {
+        //         echo "Building infrastructure" 
+        //         sh 'pwd'
+        //          dir('infrastructure/production') {              
         //              sh label: '' , script: 'terraform init -force-copy -no-color'
         //              sh label: '' , script: 'terraform plan -no-color'
         //              sh label: '' , script: 'terraform apply -no-color -auto-approve'
         //              script {ecr_url= sh (script: "terraform output --raw ecr_url", returnStdout: true)}
         //              sh label: '' , script: 'terraform destroy -no-color -auto-approve'
         //         }
+                
+        //     }
+        // }
+
+        stage("Building development Infrastructure") {
+            when { branch 'Development' }
+            steps {
+                echo "Building infrastructure" 
+                sh 'pwd'
+                 dir('infrastructure/development') {              
+                     sh label: '' , script: 'terraform init -force-copy -no-color'
+                     sh label: '' , script: 'terraform plan -no-color'
+                    //  sh label: '' , script: 'terraform apply -no-color -auto-approve'
+                    //  sh label: '' , script: 'terraform destroy -no-color -auto-approve'
+                }
+
                 
         //     }
         // }
