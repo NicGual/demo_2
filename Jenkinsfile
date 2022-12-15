@@ -60,12 +60,11 @@ pipeline {
             steps {
                 echo "Building infrastructure" 
                 sh 'pwd'
-                // 'infrastructure/development'
-                 dir('infrastructure/production') {              
+                 dir('infrastructure/development') {              
                      sh label: '' , script: 'terraform init -force-copy -no-color'
                      sh label: '' , script: 'terraform plan -no-color'
                     //  sh label: '' , script: 'terraform apply -no-color -auto-approve'
-                     sh label: '' , script: 'terraform destroy -no-color -auto-approve'
+                    //  sh label: '' , script: 'terraform destroy -no-color -auto-approve'
                 }
                 
             }
