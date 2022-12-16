@@ -26,7 +26,7 @@ pipeline {
             }            
         }
 
-        stage("Building s3 bucket & ECR") {
+        stage("Building s3 bucket & ECR for production") {
             when { branch 'main' }
             steps {
                 echo "Building infrastructure" 
@@ -40,7 +40,7 @@ pipeline {
             }
         }
 
-        stage("Building s3 bucket & ECR") {
+        stage("Building s3 bucket & ECR for development") {
             when { branch 'Development' }
             steps {
                 echo "Building infrastructure" 
