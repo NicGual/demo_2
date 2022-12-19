@@ -24,7 +24,7 @@ pipeline {
                         sh 'npm install'
                         sh 'npm test'                        
                     }
-                    sh "${SCANNER}/bin/sonar-scanner \ "
+                    sh "${SCANNER}/bin/sonar-scanner "
                 }                 
             }            
         }
