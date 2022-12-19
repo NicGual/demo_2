@@ -24,12 +24,7 @@ pipeline {
                         sh 'npm install'
                         sh 'npm test'                        
                     }
-                    dir('app'){
-                        sh "${SCANNER}/bin/sonar-scanner \
-                            -Dsonar.sources=. \
-                            -Dsonar.projectKey=demo-3 \
-                            -Dsonar.host.url=http://10.0.1.52:9000 "
-                    }
+                    sh "${SCANNER}/bin/sonar-scanner \ "
                 }                 
             }            
         }
