@@ -28,6 +28,13 @@ pipeline {
                 }                 
             }            
         }
+        stage("Quality Gate Approval") {
+            steps{
+                timeout(time: 5, unit: 'MINUTES') {
+                    waitForQualityGate abortPipeline: true
+                }
+            }
+        }
 
         // stage("unit tests") {
         //     when { anyOf {  branch 'DD2-*'; branch 'Development' } }
