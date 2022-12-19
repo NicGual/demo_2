@@ -23,8 +23,8 @@ pipeline {
                     dir('app_test'){                  
                         sh 'npm install'
                         sh 'npm test'
-                        sh "${SCANNER}/bin/sonar-scanner 
-                            -Dsonar.sources=. 
+                        sh "${SCANNER}/bin/sonar-scanner \
+                            -Dsonar.sources=. \
                             -Dsonar.host.url=http://10.0.1.52:9000 "
                     }
                 }                 
