@@ -22,7 +22,9 @@ pipeline {
                 withSonarQubeEnv('sq-server'){
                     dir('app_test'){                  
                         sh 'npm install'
-                        sh 'npm test'
+                        sh 'npm test'                        
+                    }
+                    dir('app'){
                         sh "${SCANNER}/bin/sonar-scanner \
                             -Dsonar.sources=. \
                             -Dsonar.projectKey=demo-3 \
