@@ -13,9 +13,9 @@ pipeline {
 
     stages {
 
+        enviroment {SCANNER = tool 'sq-scanner'}
         stage("sonarqube analysis") {
             when { anyOf {  branch 'DD2-*'; branch 'Development' } }
-            enviroment {SCANNER = tool 'sq-scanner'}
             steps {
                 echo "Testing Component"
                 sh 'cp -r -a app app_test'
