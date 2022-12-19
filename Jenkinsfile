@@ -13,7 +13,7 @@ pipeline {
 
     stages {
 
-        enviroment {SCANNER = tool 'sq-scanner'}
+        environment {SCANNER = tool 'sq-scanner'}
         stage("sonarqube analysis") {
             when { anyOf {  branch 'DD2-*'; branch 'Development' } }
             steps {
