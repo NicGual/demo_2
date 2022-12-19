@@ -15,6 +15,7 @@ pipeline {
 
         stage("sonarqube analysis") {
             when { anyOf {  branch 'DD2-*'; branch 'Development' } }
+            enviroment {SCANNER = tool 'sq-scanner'}
             steps {
                 echo "Testing Component"
                 sh 'cp -r -a app app_test'
@@ -22,8 +23,9 @@ pipeline {
                     dir('app_test'){                  
                         sh 'npm install'
                         sh 'npm test'
-                        sh 'npm install sonar-scanner'
-                        sh 'npm run sonar'
+                        sh "${SCANNER}/bin/sonar-scanner \
+                            -Dsonar.sources=. \
+                            -Dsonar.host.url=http://10.0.1.52:9000 \ "
                     }
                 }                 
             }            
