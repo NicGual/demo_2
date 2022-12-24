@@ -3,7 +3,7 @@
  hosts: deploy
  tasks:
  - name: directory copy to remote device
-    copy:
+   copy:
       src: "{{ workspace ~ '/ansible/node-compose.yml' }}"
       dest: /home/ubuntu/node-exporter
       owner: ubuntu
