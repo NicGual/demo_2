@@ -3,7 +3,7 @@
  hosts: deploy
  tasks:
   - name: creating folder
-    shell: [ -d /home/ubuntu/node-exporter ] || mkdir /home/ubuntu/node-exporter
+    shell: "[ -d /home/ubuntu/node-exporter ] || mkdir /home/ubuntu/node-exporter"
   - name: directory copy to remote device
     copy:
         src: "{{ workspace ~ '/ansible/node-compose.yml' }}"
