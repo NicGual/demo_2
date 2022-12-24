@@ -1,0 +1,6 @@
+-
+ name: Initializing Node Exporter
+ hosts: deploy
+ tasks:
+  - name: run node-compose
+    shell: docker compose -f node-compose.yml up -d
