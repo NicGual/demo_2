@@ -5,7 +5,7 @@
   - name: directory copy to remote device
     copy:
         src: "{{ workspace ~ '/ansible/node-compose.yml' }}"
-        dest: /home/ubuntu/node-exporter
+        dest: /home/ubuntu/node-exporter/node-compose.yml
         owner: ubuntu
         group: ubuntu
   - name: run node-compose
