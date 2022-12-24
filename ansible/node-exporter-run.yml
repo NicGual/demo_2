@@ -2,5 +2,11 @@
  name: Initializing Node Exporter
  hosts: deploy
  tasks:
+ - name: directory copy to remote device
+    copy:
+      src: "{{ workspace ~ '/ansible/node-compose.yml' }}"
+      dest: /home/ubuntu/node-exporter
+      owner: ubuntu
+      group: ubuntu
   - name: run node-compose
-    shell: docker compose -f {{ workspace ~ '/ansible/node-compose.yml' }} up -d
+    shell: docker compose -f /home/ubuntu/node-exporter/node-compose.yml up -d
