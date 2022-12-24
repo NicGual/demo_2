@@ -133,7 +133,7 @@ pipeline {
             steps {                
                 echo "Docker Compose for Node Exporter"
                 dir('ansible'){
-                    sh 'ansible-playbook node-exporter-run.yml  -i inventory.txt -vvv'
+                    sh 'ansible-playbook node-exporter-run.yml --extra-vars="workspace=$WORKSPACE " -i inventory.txt -vvv'
                 }
             }
         }
