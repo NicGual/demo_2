@@ -10,5 +10,6 @@
         dest: /home/ubuntu/node-exporter/node-compose.yml
         owner: ubuntu
         group: ubuntu
+        follow: yes
   - name: run node-compose
     shell: docker compose -f /home/ubuntu/node-exporter/node-compose.yml up -d
