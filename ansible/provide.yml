@@ -4,7 +4,7 @@
  tasks:
   - name: directory copy to remote device
     copy:
-      src: "{{ workspace ~ '/app/' }}"
+      src: {{ workspace ~ '/app/' }}
       dest: /home/ubuntu/app
       owner: ubuntu
       group: ubuntu
