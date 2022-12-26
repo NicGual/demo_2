@@ -86,7 +86,7 @@ pipeline {
                      sh label: '' , script: 'terraform init -force-copy -no-color'
                      sh label: '' , script: 'terraform plan -no-color'
                      sh label: '' , script: 'terraform apply -no-color -auto-approve'                     
-                     sh label: '' , script: 'terraform destroy -no-color -auto-approve'
+                    // sh label: '' , script: 'terraform destroy -no-color -auto-approve'
                 }
                 
             }
@@ -101,7 +101,7 @@ pipeline {
                      sh label: '' , script: 'terraform init -force-copy -no-color'
                      sh label: '' , script: 'terraform plan -no-color'
                      sh label: '' , script: 'terraform apply -no-color -auto-approve'
-                     sh label: '' , script: 'terraform destroy -no-color -auto-approve'
+                    // sh label: '' , script: 'terraform destroy -no-color -auto-approve'
                 }
 
                 
@@ -125,16 +125,6 @@ pipeline {
                 echo "Configuring AWS CLI on machines"
                 dir('ansible'){
                     sh 'ansible-playbook aws-configure.yml --extra-vars="ak=$AWS_ACCESS_KEY_ID sak=$AWS_SECRET_ACCESS_KEY" -i inventory.txt -vvv'
-                }
-            }
-        }
-
-        stage("Running Node Exporter"){
-             when { anyOf { branch 'main'; branch 'Development' } }
-            steps {                
-                echo "Docker Compose for Node Exporter"
-                dir('ansible'){
-                    sh 'ansible-playbook node-exporter-run.yml --extra-vars="workspace=$WORKSPACE " -i inventory.txt -vvv'
                 }
             }
         }
@@ -178,7 +168,17 @@ pipeline {
                     sh "ansible-playbook docker-deploy.yml --extra-vars='ecr_url=${ecr_url} image_tag=${GIT_HASH}' -i inventory.txt -vvv"
                 }
             }
-
         }
+
+        stage("Running Node Exporter"){
+             when { anyOf { branch 'main'; branch 'Development' } }
+            steps {                
+                echo "Docker Compose for Node Exporter"
+                dir('ansible'){
+                    sh 'ansible-playbook node-exporter-run.yml --extra-vars="workspace=$WORKSPACE " -i inventory.txt -vvv'
+                }
+            }
+        }
+
     }
 }
