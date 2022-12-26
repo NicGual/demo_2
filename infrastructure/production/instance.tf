@@ -12,7 +12,7 @@ resource "aws_instance" "machine-1" {
   key_name = aws_key_pair.pk-ec2-1.key_name
 
   tags = {
-    Name = "machine-1"
+    Name = "prod-build-machine-1"
   }
   provisioner "file" {
     source      = "../../config/docker-install.sh"
@@ -51,7 +51,7 @@ resource "aws_instance" "machine-2" {
   key_name = aws_key_pair.pk-ec2-2.key_name
 
   tags = {
-    Name = "machine-2"
+    Name = "prod-deploy-machine-2"
   }
 
   provisioner "file" {
@@ -90,7 +90,7 @@ resource "aws_instance" "machine-3" {
   key_name = aws_key_pair.pk-ec2-3.key_name
 
   tags = {
-    Name = "machine-3"
+    Name = "prod-deploy-machine-3"
   }
   provisioner "file" {
     source      = "../../config/docker-install.sh"
