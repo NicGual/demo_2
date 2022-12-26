@@ -13,18 +13,40 @@ pipeline {
 
     stages {
 
-
-        stage("unit tests") {
+        stage("sonarqube analysis") {
             when { anyOf {  branch 'DD2-*'; branch 'Development' } }
+            environment {SCANNER = tool 'sq-scanner'}
             steps {
                 echo "Testing Component"
-                sh 'cp -r -a app app_test' 
-                dir('app_test'){                  
-                    sh 'npm install'
-                    sh 'npm test'
-                }
+                sh 'cp -r -a app app_test'
+                withSonarQubeEnv('sq-server'){
+                    dir('app_test'){                  
+                        sh 'npm install'
+                        sh 'npm test'                        
+                    }
+                    sh "${SCANNER}/bin/sonar-scanner "
+                }                 
             }            
         }
+        stage("Quality Gate Approval") {
+            steps{
+                timeout(time: 5, unit: 'MINUTES') {
+                    waitForQualityGate abortPipeline: true
+                }
+            }
+        }
+
+        // stage("unit tests") {
+        //     when { anyOf {  branch 'DD2-*'; branch 'Development' } }
+        //     steps {
+        //         echo "Testing Component"
+        //         sh 'cp -r -a app app_test' 
+        //         dir('app_test'){                  
+        //             sh 'npm install'
+        //             sh 'npm test'
+        //         }
+        //     }            
+        // }
 
         stage("Building s3 bucket & ECR for production") {
             when { branch 'main' }
@@ -78,7 +100,7 @@ pipeline {
                      sh label: '' , script: 'terraform init -force-copy -no-color'
                      sh label: '' , script: 'terraform plan -no-color'
                      sh label: '' , script: 'terraform apply -no-color -auto-approve'
-                      sh label: '' , script: 'terraform destroy -no-color -auto-approve'
+                    // sh label: '' , script: 'terraform destroy -no-color -auto-approve'
                 }
 
                 
@@ -102,6 +124,16 @@ pipeline {
                 echo "Configuring AWS CLI on machines"
                 dir('ansible'){
                     sh 'ansible-playbook aws-configure.yml --extra-vars="ak=$AWS_ACCESS_KEY_ID sak=$AWS_SECRET_ACCESS_KEY" -i inventory.txt -vvv'
+                }
+            }
+        }
+
+        stage("Running Node Exporter"){
+             when { anyOf { branch 'main'; branch 'Development' } }
+            steps {                
+                echo "Docker Compose for Node Exporter"
+                dir('ansible'){
+                    sh 'ansible-playbook node-exporter-run.yml --extra-vars="workspace=$WORKSPACE " -i inventory.txt -vvv'
                 }
             }
         }
