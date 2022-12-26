@@ -11,7 +11,7 @@ resource "aws_instance" "dev-machine-1" {
   # the public SSH key
   key_name = aws_key_pair.dev-pk-ec2-1.key_name
 
-  private_ip = "10.0.1.1"
+  private_ip = "10.0.1.5"
 
   tags = {
     Name = "dev-build-machine-1"
@@ -52,7 +52,7 @@ resource "aws_instance" "dev-machine-2" {
   # the public SSH key
   key_name = aws_key_pair.dev-pk-ec2-2.key_name
 
-  private_ip = "10.0.1.2"
+  private_ip = "10.0.1.6"
 
   tags = {
     Name = "dev-deploy-machine-2"
