@@ -100,7 +100,7 @@ pipeline {
                      sh label: '' , script: 'terraform init -force-copy -no-color'
                      sh label: '' , script: 'terraform plan -no-color'
                      sh label: '' , script: 'terraform apply -no-color -auto-approve'
-                     sh label: '' , script: 'terraform destroy -no-color -auto-approve'
+                    // sh label: '' , script: 'terraform destroy -no-color -auto-approve'
                 }
 
                 
