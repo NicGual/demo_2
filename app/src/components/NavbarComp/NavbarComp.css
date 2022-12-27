@@ -85,7 +85,7 @@ color: #FF7A00;
 }
 
 .btn-iniciarSesion:hover {
-    border-color: #FF7A00 !important;
-    background-color: #FF7A00 !important;
+    border-color: red !important;  /*#FF7A00*/
+    background-color: red !important;
     color: white;
 }
