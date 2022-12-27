@@ -12,3 +12,4 @@ services:
       pid: host
       volumes:
       - '/:/host:ro,rslave'
+      network_mode: host
