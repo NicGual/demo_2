@@ -13,17 +13,23 @@ pipeline {
 
     stages {
 
+        stage("unit tests") {
+            when { anyOf {  branch 'DD2-*'; branch 'Development' } }
+            steps {
+                echo "Testing Component"
+                sh 'cp -r -a app app_test' 
+                dir('app_test'){                  
+                    sh 'npm install'
+                    sh 'npm test'
+                }
+            }            
+        }
+
         stage("sonarqube analysis") {
             when { anyOf {  branch 'DD2-*'; branch 'Development' } }
             environment {SCANNER = tool 'sq-scanner'}
             steps {
-                echo "Testing Component"
-                sh 'cp -r -a app app_test'
                 withSonarQubeEnv('sq-server'){
-                    dir('app_test'){                  
-                        sh 'npm install'
-                        sh 'npm test'                        
-                    }
                     sh "${SCANNER}/bin/sonar-scanner "
                 }                 
             }            
@@ -36,18 +42,6 @@ pipeline {
                 }
             }
         }
-
-        // stage("unit tests") {
-        //     when { anyOf {  branch 'DD2-*'; branch 'Development' } }
-        //     steps {
-        //         echo "Testing Component"
-        //         sh 'cp -r -a app app_test' 
-        //         dir('app_test'){                  
-        //             sh 'npm install'
-        //             sh 'npm test'
-        //         }
-        //     }            
-        // }
 
         stage("Building s3 bucket & ECR for production") {
             when { branch 'main' }
@@ -85,8 +79,7 @@ pipeline {
                  dir('infrastructure/production') {              
                      sh label: '' , script: 'terraform init -force-copy -no-color'
                      sh label: '' , script: 'terraform plan -no-color'
-                     sh label: '' , script: 'terraform apply -no-color -auto-approve'                     
-                    // sh label: '' , script: 'terraform destroy -no-color -auto-approve'
+                     sh label: '' , script: 'terraform apply -no-color -auto-approve'                                       
                 }
                 
             }
@@ -100,8 +93,7 @@ pipeline {
                  dir('infrastructure/development') {              
                      sh label: '' , script: 'terraform init -force-copy -no-color'
                      sh label: '' , script: 'terraform plan -no-color'
-                     sh label: '' , script: 'terraform apply -no-color -auto-approve'
-                    // sh label: '' , script: 'terraform destroy -no-color -auto-approve'
+                     sh label: '' , script: 'terraform apply -no-color -auto-approve'                    
                 }
 
                 
